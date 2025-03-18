@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "~/Views/Shared/_nen.cshtml";
+}
+
+@model FastFoodOnline.Models.ViewModel.EditUserViewModel
+
+<h2>Chỉnh sửa tài khoản</h2>
+
+<form asp-action="EditUser" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label>Số điện thoại</label>
+        <input asp-for="PhoneNumber" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Họ và tên</label>
+        <input asp-for="HoTen" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label>Địa chỉ</label>
+        <input asp-for="DiaChi" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Thành phố</label>
+        <input asp-for="ThanhPho" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Giới tính</label>
+        <select asp-for="GioiTinh" class="form-control">
+            <option value="">Chọn giới tính</option>
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
+            <option value="Khác">Khác</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Ngày sinh</label>
+        <input asp-for="NgaySinh" type="date" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Lưu</button>
+    <a asp-action="QuanLyTaiKhoan" class="btn btn-secondary">Hủy</a>
+</form>

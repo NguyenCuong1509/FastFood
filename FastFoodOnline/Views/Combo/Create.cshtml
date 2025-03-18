@@ -1,0 +1,92 @@
+﻿@model Combo
+
+@{
+    ViewData["Title"] = "Tạo Combo";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var monAnList = ViewBag.MonAnList as List<MonAn>;
+}
+
+<h2>Tạo Combo Mới</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label>Tên Combo</label>
+        <input asp-for="TenCombo" class="form-control" required />
+        <span asp-validation-for="TenCombo" class="text-danger"></span>
+    </div>
+
+    <h4>Chọn Món Ăn</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Chọn</th>
+                <th>Món Ăn</th>
+                <th>Giá</th>
+                <th>Số Lượng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var monAn in monAnList)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="monAnIds" value="@monAn.MonAnId" class="monAnCheckbox" data-gia="@monAn.Gia" />
+                    </td>
+                    <td>@monAn.TenMon</td>
+                    <td>@monAn.Gia.ToString("N0") VND</td>
+                    <td>
+                        <input type="number" name="soLuongs" min="1" value="1" class="form-control soLuongInput" data-gia="@monAn.Gia" disabled />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="form-group">
+        <label>Giá Gốc (VND)</label>
+        <input asp-for="GiaGoc" id="GiaGoc" class="form-control" type="number" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Giá Khuyến Mãi (VND)</label>
+        <input asp-for="GiaKhuyenMai" id="GiaKhuyenMai" class="form-control" type="number" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-success">Lưu</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const checkboxes = document.querySelectorAll(".monAnCheckbox");
+        const soLuongInputs = document.querySelectorAll(".soLuongInput");
+        const giaGocInput = document.getElementById("GiaGoc");
+        const giaKhuyenMaiInput = document.getElementById("GiaKhuyenMai");
+
+        function updateGia() {
+            let giaGoc = 0;
+
+            checkboxes.forEach((checkbox, index) => {
+                if (checkbox.checked) {
+                    let gia = parseFloat(checkbox.getAttribute("data-gia"));
+                    let soLuong = parseInt(soLuongInputs[index].value) || 1;
+                    giaGoc += gia * soLuong;
+                }
+            });
+
+            giaGocInput.value = giaGoc;
+            giaKhuyenMaiInput.value = Math.round(giaGoc * 0.9); // Giảm 10% giá khuyến mãi
+        }
+
+        checkboxes.forEach((checkbox, index) => {
+            checkbox.addEventListener("change", function () {
+                soLuongInputs[index].disabled = !this.checked;
+                updateGia();
+            });
+        });
+
+        soLuongInputs.forEach((input) => {
+            input.addEventListener("input", updateGia);
+        });
+    });
+</script>

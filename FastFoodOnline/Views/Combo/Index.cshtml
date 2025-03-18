@@ -1,0 +1,46 @@
+﻿@model List<Combo>
+
+@{
+    ViewData["Title"] = "Danh sách Combo";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+
+<h2>Danh sách Combo</h2>
+
+<a asp-action="Create" class="btn btn-primary">Thêm Combo</a>
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Tên Combo</th>
+            <th>Giá Gốc</th>
+            <th>Giá Khuyến Mãi</th>
+            <th>Món Ăn</th>
+            @* <th>Hành Động</th> *@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var combo in Model)
+        {
+            <tr>
+                <td>@combo.ComboId</td>
+                <td>@combo.TenCombo</td>
+                <td><del>@combo.GiaGoc.ToString("N0") VND</del></td>
+                <td><strong>@combo.GiaKhuyenMai.ToString("N0") VND</strong></td>
+                <td>
+                    <ul>
+                        @foreach (var item in combo.MonAnCombos)
+                        {
+                            <li>@item.MonAn.TenMon - SL: @item.SoLuong</li>
+                        }
+                    </ul>
+                </td>
+               @*  <td>
+                    <a asp-action="Edit" asp-route-id="@combo.ComboId" class="btn btn-warning btn-sm">Sửa</a>
+                </td> *@
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<FastFoodOnline.Models.HoaDon>
+
+@{
+    ViewData["Title"] = "Danh Sách Hóa Đơn";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+
+<h1>Danh Sách Hóa Đơn</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Người Đặt</th>
+            <th>Ngày Tạo</th>
+            <th>Tổng Tiền</th>
+            <th>Trạng Thái</th>
+            <th>Hành Động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.HoaDonId</td>
+                <td>@(item.User?.UserName ?? "Khách hàng")</td>
+                <td>@item.NgayTao.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@item.TongTien.ToString("C")</td>
+                <td>@item.TrangThai</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.HoaDonId" class="btn btn-info">Chi Tiết</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,25 @@
+﻿@model FastFoodOnline.Models.ViewModel.ProfileViewModel
+@{
+    ViewData["Title"] = "Thông tin tài khoản";
+    Layout = "~/Views/Shared/_nen.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center">Thông tin tài khoản</h2>
+    <hr />
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">@Model.HoTen</h5>
+            <p class="card-text"><strong>Email:</strong> @Model.Email</p>
+            <p class="card-text"><strong>Số điện thoại:</strong> @Model.PhoneNumber</p>
+            <p class="card-text"><strong>Địa chỉ:</strong> @Model.DiaChi, @Model.ThanhPho</p>
+            <p class="card-text"><strong>Giới tính:</strong> @Model.GioiTinh</p>
+            <p class="card-text"><strong>Ngày sinh:</strong> @(Model.NgaySinh?.ToString("dd/MM/yyyy") ?? "Chưa cập nhật")</p>
+            <p class="card-text"><strong>Quyền hạn:</strong> @string.Join(", ", Model.Roles)</p>
+
+            <a asp-action="EditUser" asp-route-id="@Model.Id" class="btn btn-warning">Sửa</a>
+            <a asp-controller="GioHang" asp-action="DonHangCuaToi" class="btn btn-primary">Xem Đơn Hàng</a>
+        </div>
+    </div>
+</div>

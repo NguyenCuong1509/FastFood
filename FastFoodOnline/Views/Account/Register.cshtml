@@ -1,0 +1,128 @@
+﻿@using FastFoodOnline.Models.ViewModel
+@model RegisterViewModel
+
+@{
+    ViewData["Title"] = "Đăng Ký";
+    Layout = "~/Views/Shared/_nen.cshtml";
+}
+<style>
+    .min-vh-100 {
+        min-height: 100vh;
+    }
+
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .card-body {
+        padding: 25px;
+    }
+
+    .btn-primary {
+        border-radius: 8px;
+        font-size: 1.2rem;
+        transition: 0.3s;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .form-control {
+        border-radius: 6px;
+        border: 1px solid #ced4da;
+        padding: 10px;
+    }
+
+    .card-footer a {
+        color: #007bff;
+        font-weight: bold;
+    }
+
+        .card-footer a:hover {
+            text-decoration: underline;
+        }
+</style>
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg">
+            <div class="card-header bg-primary text-white text-center">
+                <h3>Đăng Ký</h3>
+            </div>
+            <div class="card-body">
+                <form asp-action="Register">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label fw-bold"></label>
+                        <input asp-for="Email" class="form-control" required />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label fw-bold"></label>
+                        <input asp-for="Password" type="password" class="form-control" required />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ComfirmPassword" class="form-label fw-bold"></label>
+                        <input asp-for="ComfirmPassword" type="password" class="form-control" required />
+                        <span asp-validation-for="ComfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="PhoneNumber" class="form-label fw-bold"></label>
+                        <input asp-for="PhoneNumber" class="form-control" required />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="HoTen"></label>
+                        <input asp-for="HoTen" class="form-control" />
+                        <span asp-validation-for="HoTen" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="DiaChi"></label>
+                        <input asp-for="DiaChi" class="form-control" />
+                        <span asp-validation-for="DiaChi" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ThanhPho"></label>
+                        <input asp-for="ThanhPho" class="form-control" />
+                        <span asp-validation-for="ThanhPho" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="GioiTinh"></label>
+                        <select asp-for="GioiTinh" class="form-control">
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                        </select>
+                        <span asp-validation-for="GioiTinh" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="NgaySinh"></label>
+                        <input asp-for="NgaySinh" type="date" class="form-control" />
+                        <span asp-validation-for="NgaySinh" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Tạo tài khoản</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <a href="/" class="text-decoration-none text-primary fw-bold">Quay lại trang chủ</a>
+            </div>
+        </div>
+    </div>
+</div>

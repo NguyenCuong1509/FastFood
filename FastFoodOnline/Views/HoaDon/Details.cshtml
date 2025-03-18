@@ -1,0 +1,64 @@
+﻿@model FastFoodOnline.Models.HoaDon
+
+@{
+    ViewData["Title"] = "Chi Tiết Hóa Đơn";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Chi Tiết Hóa Đơn</h2>
+
+@if (Model != null)
+{
+    <!-- Form cập nhật trạng thái -->
+    <form asp-action="UpdateStatus" method="post">
+        <input type="hidden" name="id" value="@Model.HoaDonId" />
+
+        <label for="trangThai">Cập nhật trạng thái:</label>
+        <select name="trangThai" id="trangThai" class="form-control">
+            @foreach (var trangThai in Enum.GetValues(typeof(TrangThaiHoaDon)))
+            {
+                // Luôn hiển thị "Hủy" (DaHuy) và trạng thái tiếp theo
+                if ((TrangThaiHoaDon)trangThai == TrangThaiHoaDon.DaHuy || (int)trangThai == (int)Model.TrangThai + 1)
+                {
+                    <option value="@trangThai">
+                        @trangThai
+                    </option>
+                }
+            }
+        </select>
+
+        <button type="submit" class="btn btn-primary mt-2">Cập nhật trạng thái</button>
+    </form>
+
+    <hr />
+
+    <table class="table">
+        <tr>
+            <th>Món Ăn / Combo</th>
+            <th>Số Lượng</th>
+            <th>Giá</th>
+        </tr>
+
+        @if (Model.HoaDonChiTiets != null && Model.HoaDonChiTiets.Any())
+        {
+            @foreach (var item in Model.HoaDonChiTiets)
+            {
+                <tr>
+                    <td>
+                        @(item.MonAn != null ? item.MonAn.TenMon : item.Combo != null ? item.Combo.TenCombo : "Không xác định")
+                    </td>
+                    <td>@item.SoLuong</td>
+                    <td>@item.Gia.ToString("N0") VND</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="3">Không có chi tiết hóa đơn.</td></tr>
+        }
+    </table>
+}
+else
+{
+    <p>Không tìm thấy hóa đơn.</p>
+}

@@ -1,0 +1,30 @@
+﻿@model FastFoodOnline.Models.Combo
+
+@{
+    ViewData["Title"] = "Chi Tiết Combo";
+    Layout = "~/Views/Shared/_nen.cshtml";
+}
+
+<h2>@Model.TenCombo</h2>
+<p><b>Giá Gốc:</b> <s>@Model.GiaGoc.ToString("N0") VNĐ</s></p>
+<p><b>Khuyến Mãi:</b> <span class="text-danger fw-bold">@Model.GiaKhuyenMai.ToString("N0") VNĐ</span></p>
+
+<h4>Danh Sách Món Ăn Trong Combo:</h4>
+<div class="row">
+    @foreach (var monAnCombo in Model.MonAnCombos)
+    {
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <img src="@monAnCombo.MonAn.HinhAnh" class="card-img-top" alt="@monAnCombo.MonAn.TenMon" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">@monAnCombo.MonAn.TenMon</h5>
+                    <p class="card-text text-danger fw-bold">@monAnCombo.MonAn.Gia.ToString("N0") VNĐ</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<a asp-controller="GioHang" asp-action="ThemComboVaoGio" asp-route-comboId="@Model.ComboId" class="btn btn-success">
+    Thêm vào giỏ
+</a>
+<a asp-action="Index" class="btn btn-secondary">Quay lại</a>

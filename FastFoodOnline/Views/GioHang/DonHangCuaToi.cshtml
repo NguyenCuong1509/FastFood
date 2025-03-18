@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_nen.cshtml";
+}
+@model List<FastFoodOnline.Models.HoaDon>
+
+<h2>Đơn hàng của tôi</h2>
+
+@if (Model.Count == 0)
+{
+    <p>Bạn chưa có đơn hàng nào.</p>
+}
+else
+{
+    @foreach (var hoaDon in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                <strong>Đơn hàng #@hoaDon.HoaDonId</strong> - Ngày: @hoaDon.NgayTao.ToString("dd/MM/yyyy HH:mm") <br>
+                <span class="badge bg-info">@hoaDon.TrangThai</span>
+            </div>
+            <div class="card-body">
+                <p><strong>Tổng tiền:</strong> @hoaDon.TongTien.ToString("N0") VNĐ</p>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Món ăn</th>
+                            <th>Số lượng</th>
+                            <th>Giá</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in hoaDon.HoaDonChiTiets)
+                        {
+                            <tr>
+                                <td>
+                                    @if (item.MonAn != null)
+                                    {
+                                        <strong>Món ăn:</strong> @item.MonAn.TenMon
+                                    }
+                                    else if (item.Combo != null)
+                                    {
+                                        <strong>Combo:</strong> @item.Combo.TenCombo
+                                    }
+                                    else
+                                    {
+                                        <span class="text-danger">Sản phẩm không tồn tại</span>
+                                    }
+                                </td>
+                                <td>@item.SoLuong</td>
+                                <td>@item.Gia.ToString("N0") VNĐ</td>
+                                <td>@(item.SoLuong * item.Gia) VNĐ</td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    }
+}

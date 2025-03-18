@@ -1,0 +1,98 @@
+﻿@model Combo
+
+@{
+    ViewData["Title"] = "Chỉnh sửa Combo";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var monAnList = ViewBag.MonAnList as List<MonAn>;
+    var selectedMonAn = Model.MonAnCombos.Select(mc => mc.MonAnId).ToList();
+}
+
+<h2>Chỉnh sửa Combo</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ComboId" />
+
+    <div class="form-group">
+        <label>Tên Combo</label>
+        <input asp-for="TenCombo" class="form-control" required />
+        <span asp-validation-for="TenCombo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Giá Gốc (VND)</label>
+        <input asp-for="GiaGoc" id="GiaGoc" class="form-control" type="number" required />
+    </div>
+
+    <div class="form-group">
+        <label>Giá Khuyến Mãi (VND)</label>
+        <input asp-for="GiaKhuyenMai" id="GiaKhuyenMai" class="form-control" type="number" required />
+    </div>
+
+    <h4>Chọn Món Ăn</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Chọn</th>
+                <th>Món Ăn</th>
+                <th>Giá</th>
+                <th>Số Lượng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var monAn in monAnList)
+            {
+                var isChecked = selectedMonAn.Contains(monAn.MonAnId) ? "checked" : "";
+                var soLuong = Model.MonAnCombos.FirstOrDefault(mc => mc.MonAnId == monAn.MonAnId)?.SoLuong ?? 1;
+
+                <tr>
+                    <td>
+                        <input type="checkbox" name="monAnIds" value="@monAn.MonAnId" class="monAnCheckbox" data-gia="@monAn.Gia" @isChecked />
+                    </td>
+                    <td>@monAn.TenMon</td>
+                    <td>@monAn.Gia.ToString("N0") VND</td>
+                    <td>
+                        <input type="number" name="soLuongs" min="1" value="@soLuong" class="form-control soLuongInput" data-gia="@monAn.Gia" @((isChecked == "checked") ? "" : "disabled") />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-success">Cập Nhật</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const checkboxes = document.querySelectorAll(".monAnCheckbox");
+        const soLuongInputs = document.querySelectorAll(".soLuongInput");
+
+        function updateGia() {
+            let giaGoc = 0;
+
+            checkboxes.forEach((checkbox, index) => {
+                if (checkbox.checked) {
+                    let gia = parseFloat(checkbox.getAttribute("data-gia"));
+                    let soLuong = parseInt(soLuongInputs[index].value) || 1;
+                    giaGoc += gia * soLuong;
+                }
+            });
+
+            document.getElementById("GiaGoc").value = giaGoc;
+            document.getElementById("GiaKhuyenMai").value = Math.round(giaGoc * 0.9); // Giảm 10%
+        }
+
+        checkboxes.forEach((checkbox, index) => {
+            checkbox.addEventListener("change", function () {
+                soLuongInputs[index].disabled = !this.checked;
+                updateGia();
+            });
+        });
+
+        soLuongInputs.forEach((input) => {
+            input.addEventListener("input", updateGia);
+        });
+
+        updateGia(); // Cập nhật giá khi tải trang
+    });
+</script>

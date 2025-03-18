@@ -1,0 +1,111 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using Microsoft.AspNetCore.Identity
+@model List<FastFoodOnline.Models.ApplicationUser>
+
+<h2>Quản lý tài khoản</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+<a class="btn-getstarted" asp-controller="Account" asp-action="Profile">Thông Tin Cá Nhân</a>
+<!-- Form tạo Admin -->
+<form asp-action="TaoTaiKhoanAdmin" method="post" class="mb-3">
+    <div class="form-group">
+        <label>Email:</label>
+        <input type="email" name="email" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Mật khẩu:</label>
+        <input type="password" name="password" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-success">Tạo tài khoản Admin</button>
+</form>
+
+<!-- Form tạo tài khoản khách hàng -->
+<form asp-action="TaoTaiKhoanKhachHang" method="post" class="mb-3">
+    <div class="form-group">
+        <label>Email:</label>
+        <input type="email" name="email" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Mật khẩu:</label>
+        <input type="password" name="password" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Tạo tài khoản khách hàng</button>
+</form>
+
+
+@inject UserManager<ApplicationUser> _userManager
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Quyền</th>
+            <th>Trạnh thái</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            var roles = await _userManager.GetRolesAsync(user);
+            <tr>
+                <td>@user.Email</td>
+                <td>
+                    @if (roles.Any())
+                    {
+                        @foreach (var role in roles)
+                        {
+                            <span class="badge bg-info">@role</span>
+                        }
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Chưa có quyền</span>
+                    }
+                </td>
+                <td>@(user.EmailConfirmed ? "Đã kích hoạt" : "Chưa kích hoạt")</td>
+                <td>
+                <a asp-action="EditUser" asp-route-id="@user.Id" class="btn btn-warning">Sửa</a>
+
+                    @if (user.EmailConfirmed)
+                    {
+                        <!-- Nút Ngừng Hoạt Động -->
+                        <form asp-action="DisableUser" asp-route-id="@user.Id" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn ngừng hoạt động tài khoản này?');">
+                                Ngừng hoạt động
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <!-- Nút Kích Hoạt -->
+                        <form asp-action="ActivateUser" asp-route-id="@user.Id" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-success" onclick="return confirm('Bạn có chắc muốn kích hoạt lại tài khoản này?');">
+                                Kích hoạt
+                            </button>
+                        </form>
+                    }
+                </td>
+                <td>
+                    <form asp-action="ChangeUserRole" method="post">
+                        <input type="hidden" name="userId" value="@user.Id" />
+                        <select name="newRole" class="form-control">
+                            <option value="Admin" selected="@roles.Contains("Admin")">Admin</option>
+                            <option value="Customer" selected="@roles.Contains("Customer")">Customer</option>
+                        </select>
+                        <button type="submit" class="btn btn-info">Cập nhật quyền</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

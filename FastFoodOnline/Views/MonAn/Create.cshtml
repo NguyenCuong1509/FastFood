@@ -1,0 +1,62 @@
+﻿@model FastFoodOnline.Models.MonAn
+
+@{
+    ViewData["Title"] = "Tạo Món Ăn";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Tạo Món Ăn</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="TenMon" class="control-label"></label>
+                <input asp-for="TenMon" class="form-control" />
+                <span asp-validation-for="TenMon" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Gia" class="control-label"></label>
+                <input asp-for="Gia" class="form-control" type="number" />
+                <span asp-validation-for="Gia" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MoTa" class="control-label"></label>
+                <textarea asp-for="MoTa" class="form-control"></textarea>
+                <span asp-validation-for="MoTa" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HinhAnh" class="control-label"></label>
+                <input asp-for="HinhAnh" class="form-control" />
+                <span asp-validation-for="HinhAnh" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LoaiMonAnId" class="control-label"></label>
+                <select asp-for="LoaiMonAnId" class="form-control" asp-items="ViewBag.LoaiMonAnId">
+                    <option value="">-- Chọn loại món ăn --</option>
+                </select>
+                <span asp-validation-for="LoaiMonAnId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary">Tạo</button>
+                <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
