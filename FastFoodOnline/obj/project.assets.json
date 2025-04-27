@@ -8127,11 +8127,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\demo\\FastFoodOnline\\FastFoodOnline\\FastFoodOnline.csproj",
+      "projectUniqueName": "C:\\Users\\ADMIN\\Source\\Repos\\FastFood\\FastFoodOnline\\FastFoodOnline.csproj",
       "projectName": "FastFoodOnline",
-      "projectPath": "D:\\demo\\FastFoodOnline\\FastFoodOnline\\FastFoodOnline.csproj",
+      "projectPath": "C:\\Users\\ADMIN\\Source\\Repos\\FastFood\\FastFoodOnline\\FastFoodOnline.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\demo\\FastFoodOnline\\FastFoodOnline\\obj\\",
+      "outputPath": "C:\\Users\\ADMIN\\Source\\Repos\\FastFood\\FastFoodOnline\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

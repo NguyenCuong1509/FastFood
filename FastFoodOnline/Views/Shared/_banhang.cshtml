@@ -61,35 +61,40 @@
             </nav>
             @if (User.Identity.IsAuthenticated)
             {
-                    <span class="btn-getstarted">@User.Identity.Name!</span>
-        
-
-                @if (User.IsInRole("Admin"))
-                {
+                <div class="d-flex gap-2">
+                   @*  <span class="btn-getstarted">@User.Identity.Name!</span> *@
+                    <span class="btn-getstarted">
+                        <a class="btn-getstarted" asp-controller="Account" asp-action="Profile">
+                            <span class="btn-getstarted">
+                                @User.Identity.Name                                
+                            </span>
+                        </a>
+                    </span>
+                    @if (User.IsInRole("Admin"))
+                    {                        
                         <a class="btn-getstarted" asp-controller="Account" asp-action="QuanLyTaiKhoan">Quản Lý Tài Khoản</a>
-                
-                }
+                    }
+                    @if (User.IsInRole("Customer"))
+                    {
+                        <a class="btn-getstarted" asp-controller="GioHang" asp-action="Index">🛒 Giỏ Hàng</a>
+                    }
+     
+                  
 
-                @if (User.IsInRole("Customer"))
-                {
-                    <a class="btn-getstarted" asp-controller="Account" asp-action="Profile">Thông Tin Cá Nhân</a>
-                   
-                }
-
-
-                <a class="btn-getstarted" asp-controller="GioHang" asp-action="Index">🛒 Giỏ Hàng</a>
-              
                     <form asp-controller="Account" asp-action="Logout" method="post">
                         @Html.AntiForgeryToken()
-                    <button type="submit" class="btn-getstarted">Đăng xuất</button>
+                        <button type="submit" class="btn-getstarted">Đăng xuất</button>
                     </form>
-           
+                </div>
             }
             else
             {
-                <a class="btn-getstarted" asp-controller="Account" asp-action="LoginUser">Đăng nhập</a>
-             
+                <div class="d-flex gap-2">
+                    <a class="btn-getstarted" asp-controller="Account" asp-action="LoginUser">Đăng nhập</a>
+                    <a class="btn-getstarted" asp-controller="Account" asp-action="Register">Đăng ký</a>
+                </div>
             }
+
         </div>
     </header>
 

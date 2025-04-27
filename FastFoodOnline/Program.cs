@@ -20,43 +20,43 @@ builder.Services.AddSession();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 var app = builder.Build();
 
-//// Tạo Role & Admin mặc định
-//using (var scope = app.Services.CreateScope())
-//{
-//    var services = scope.ServiceProvider;
-//    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-//    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+// Tạo Role & Admin mặc định
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
 
-//    string[] roles = { "Admin", "Customer" };
+    string[] roles = { "Admin", "Customer" };
 
-//    foreach (var role in roles)
-//    {
-//        if (!await roleManager.RoleExistsAsync(role))
-//        {
-//            await roleManager.CreateAsync(new IdentityRole(role));
-//        }
-//    }
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
 
-//    // Tạo tài khoản Admin mặc định
-//    var adminEmail = "admin@example.com";
-//    var adminUser = await userManager.FindByEmailAsync(adminEmail);
+    // Tạo tài khoản Admin mặc định
+    var adminEmail = "admin@example.com";
+    var adminUser = await userManager.FindByEmailAsync(adminEmail);
 
-//    if (adminUser == null)
-//    {
-//        adminUser = new ApplicationUser
-//        {
-//            UserName = adminEmail,
-//            Email = adminEmail,
-//            EmailConfirmed = true
-//        };
+    if (adminUser == null)
+    {
+        adminUser = new ApplicationUser
+        {
+            UserName = adminEmail,
+            Email = adminEmail,
+            EmailConfirmed = true
+        };
 
-//        var result = await userManager.CreateAsync(adminUser, "Admin@123");
-//        if (result.Succeeded)
-//        {
-//            await userManager.AddToRoleAsync(adminUser, "Admin");
-//        }
-//    }
-//}
+        var result = await userManager.CreateAsync(adminUser, "Admin@123");
+        if (result.Succeeded)
+        {
+            await userManager.AddToRoleAsync(adminUser, "Admin");
+        }
+    }
+}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

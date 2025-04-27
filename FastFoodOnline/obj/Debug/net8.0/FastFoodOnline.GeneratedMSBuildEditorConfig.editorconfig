@@ -17,167 +17,167 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FastFoodOnline
 build_property.RootNamespace = FastFoodOnline
-build_property.ProjectDir = D:\demo\FastFoodOnline\FastFoodOnline\
+build_property.ProjectDir = C:\Users\ADMIN\source\repos\FastFood\FastFoodOnline\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\demo\FastFoodOnline\FastFoodOnline
+build_property.MSBuildProjectDirectory = C:\Users\ADMIN\source\repos\FastFood\FastFoodOnline
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Account/EditUser.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Account/EditUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxFZGl0VXNlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Account/LoginUser.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Account/LoginUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpblVzZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Account/Profile.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Account/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Account/QuanLyTaiKhoan.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Account/QuanLyTaiKhoan.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxRdWFuTHlUYWlLaG9hbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Account/Register.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Combo/Create.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Combo/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tYm9cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Combo/Edit.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Combo/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tYm9cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Combo/Index.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Combo/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tYm9cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/GioHang/DonHangCuaToi.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/GioHang/DonHangCuaToi.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lvSGFuZ1xEb25IYW5nQ3VhVG9pLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/GioHang/Index.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/GioHang/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lvSGFuZ1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/HoaDon/Details.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/HoaDon/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9hRG9uXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/HoaDon/Index.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/HoaDon/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9hRG9uXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Home/DetailCombo.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Home/DetailCombo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEZXRhaWxDb21iby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Home/Details.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Home/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Home/Index.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Home/Privacy.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Home/Search.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Home/Search.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZWFyY2guY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Home/_MonAnPartial.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Home/_MonAnPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfTW9uQW5QYXJ0aWFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/LoaiMonAns/Create.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/LoaiMonAns/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9haU1vbkFuc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/LoaiMonAns/Delete.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/LoaiMonAns/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9haU1vbkFuc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/LoaiMonAns/Details.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/LoaiMonAns/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9haU1vbkFuc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/LoaiMonAns/Edit.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/LoaiMonAns/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9haU1vbkFuc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/LoaiMonAns/Index.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/LoaiMonAns/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9haU1vbkFuc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/MonAn/Create.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/MonAn/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9uQW5cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/MonAn/Details.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/MonAn/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9uQW5cRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/MonAn/Edit.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/MonAn/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9uQW5cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/MonAn/Index.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/MonAn/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9uQW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Shared/Error.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Shared/_banhang.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Shared/_banhang.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9iYW5oYW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Shared/_LayoutAdmin.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Shared/_LayoutAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Shared/_LoginPartial.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Shared/_nen.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Shared/_nen.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9uZW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Shared/_nenphu.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Shared/_nenphu.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9uZW5waHUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/User/Edit.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/User/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/User/ListUser.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/User/ListUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMaXN0VXNlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/_ViewImports.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/_ViewStart.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/demo/FastFoodOnline/FastFoodOnline/Views/Shared/_Layout.cshtml]
+[C:/Users/ADMIN/source/repos/FastFood/FastFoodOnline/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-yxpfvu39ti

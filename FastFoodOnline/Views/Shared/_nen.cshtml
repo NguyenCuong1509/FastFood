@@ -51,39 +51,37 @@
             </a>
 
             <nav id="navmenu" class="navmenu">
-            
+
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
             @if (User.Identity.IsAuthenticated)
             {
-                <span class="btn-getstarted">@User.Identity.Name!</span>
+                <div class="d-flex gap-2">
+                    <span class="btn-getstarted">
+                        <a class="btn-getstarted" asp-controller="Home" asp-action="Index">
+                            Trang chủ
+                        </a>
+                    </span>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="btn-getstarted" asp-controller="Account" asp-action="QuanLyTaiKhoan">Quản Lý Tài Khoản</a>
+                    }
 
 
-                @if (User.IsInRole("Admin"))
-                {
-                    <a class="btn-getstarted" asp-controller="Account" asp-action="QuanLyTaiKhoan">Quản Lý Tài Khoản</a>
+                    <a class="btn-getstarted" asp-controller="GioHang" asp-action="Index">🛒 Giỏ Hàng</a>
 
-                }
-
-                @if (User.IsInRole("Customer"))
-                {
-                    <a class="btn-getstarted" asp-controller="Account" asp-action="Profile">Thông Tin Cá Nhân</a>
-
-                }
-
-
-                <a class="btn-getstarted" asp-controller="GioHang" asp-action="Index">🛒 Giỏ Hàng</a>
-
-                <form asp-controller="Account" asp-action="Logout" method="post">
-                    @Html.AntiForgeryToken()
-                    <button type="submit" class="btn-getstarted">Đăng xuất</button>
-                </form>
-
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn-getstarted">Đăng xuất</button>
+                    </form>
+                </div>
             }
             else
             {
-                <a class="btn-getstarted" asp-controller="Account" asp-action="LoginUser">Đăng nhập</a>
-
+                <div class="d-flex gap-2">
+                    <a class="btn-getstarted" asp-controller="Account" asp-action="LoginUser">Đăng nhập</a>
+                    <a class="btn-getstarted" asp-controller="Account" asp-action="Register">Đăng ký</a>
+                </div>
             }
         </div>
     </header>
@@ -92,9 +90,9 @@
 
         <!-- Menu Section -->
         <section id="menu" class="menu section">
-          <div class="container">
+            <div class="container">
                 @RenderBody()
-          </div>
+            </div>
         </section>
     </main>
 
@@ -151,10 +149,6 @@
         <div class="container copyright text-center mt-4">
             <p>© <span>Copyright</span> <strong class="px-1 sitename">Yummy</strong> <span>All Rights Reserved</span></p>
             <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you've purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
                 Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
             </div>
         </div>
