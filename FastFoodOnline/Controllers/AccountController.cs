@@ -36,7 +36,6 @@ namespace FastFoodOnline.Controllers
             var model = new Login { ReturnURL = returnUrl };
             return View(model);
         }
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -55,7 +54,7 @@ namespace FastFoodOnline.Controllers
                 var result = await _signInManager.PasswordSignInAsync(appUser, login.Password, false, false);
                 if (result.Succeeded)
                 {
-                    // 🔹 Kiểm tra nếu _context không bị null trước khi truy cập database
+                    // 🔹 Kiểm tra và tạo giỏ hàng nếu cần
                     if (_context != null && _context.GioHangs != null)
                     {
                         var existingCart = await _context.GioHangs.FirstOrDefaultAsync(g => g.UserId == appUser.Id);
@@ -70,14 +69,24 @@ namespace FastFoodOnline.Controllers
                         }
                     }
 
-                    // 🔹 Luôn chuyển về Home/Index sau khi đăng nhập thành công
-                    return RedirectToAction("Index", "Home");
+                    // 🔹 KIỂM TRA ROLE
+                    if (await _userManager.IsInRoleAsync(appUser, "Admin"))
+                    {
+                        // Nếu là Admin thì chuyển qua trang quản lý
+                        return RedirectToAction("QuanLyTaiKhoan", "Account");
+                    }
+                    else
+                    {
+                        // Nếu không phải Admin (tức là khách hàng), thì về Home/Index
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
 
                 ModelState.AddModelError(nameof(login.Email), "Login Failed: Email hoặc mật khẩu không đúng.");
             }
             return View(login);
         }
+
 
         [HttpGet]
         public IActionResult Register()

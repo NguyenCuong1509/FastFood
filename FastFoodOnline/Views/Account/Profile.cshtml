@@ -1,7 +1,7 @@
 ﻿@model FastFoodOnline.Models.ViewModel.ProfileViewModel
 @{
     ViewData["Title"] = "Thông tin tài khoản";
-    Layout = "~/Views/Shared/_nen.cshtml";
+    Layout = User.IsInRole("Admin") ? "~/Views/Shared/_LayoutAdmin.cshtml" : "~/Views/Shared/_nen.cshtml";
 }
 
 <div class="container mt-4">

@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/Shared/_nen.cshtml";
+    Layout = User.IsInRole("Admin") ? "~/Views/Shared/_LayoutAdmin.cshtml" : "~/Views/Shared/_nen.cshtml";
 }
 
 @model FastFoodOnline.Models.ViewModel.EditUserViewModel
@@ -40,7 +40,6 @@
             <option value="">Chọn giới tính</option>
             <option value="Nam">Nam</option>
             <option value="Nữ">Nữ</option>
-            <option value="Khác">Khác</option>
         </select>
     </div>
 

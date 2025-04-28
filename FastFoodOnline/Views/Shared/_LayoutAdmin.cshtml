@@ -37,9 +37,13 @@
                 <img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt=""> *@
             </div>
             <div class="profile-usertitle">
-                <div class="profile-usertitle-name"><i class="fa-solid fa-user"></i> @User.Identity.Name</div>
+                <div class="profile-usertitle-name">
+                    <i class="fa-solid fa-user"></i> @(User?.Identity?.Name ?? "Guest")
+                </div>
+
                 <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
             </div>
+
             <div class="clear"></div>
         </div>
         <div class="divider"></div>
@@ -49,26 +53,19 @@
             <li><a asp-controller="LoaiMonAns" asp-action="Index"><i class="fa-brands fa-buffer"></i>Loại Sản Phẩm</a></li>
             <li><a asp-controller="HoaDon" asp-action="Index"><i class="fa-solid fa-file-invoice"></i> Quản Lý Hóa Đơn</a></li>
             <li><a asp-controller="Account" asp-action="QuanLyTaiKhoan"><i class="fa-solid fa-users"></i> Khách hàng</a></li>
-            <li><a asp-controller="Home" asp-action="Index"> Quay lại</a></li>
+            <li>
+                <a class="btn-getstarted" asp-controller="Account" asp-action="Profile">
+                    <span class="btn-getstarted">
+                        @(User?.Identity?.Name ?? "Guest")
+                    </span>
+                </a>
+            </li>
             <li>
                 <a href="#" id="logout-link" class="nav-link text-dark">
                     <em class="fa fa-power-off">&nbsp;</em> Logout
                 </a>
             </li>
-            <script>
-                document.getElementById("logout-link").addEventListener("click", function (e) {
-                    e.preventDefault();
-                    fetch('@Url.Action("Logout", "Account")', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
-                        }
-                    }).then(() => {
-                        window.location.href = "/"; // Chuyển hướng sau khi logout
-                    });
-                });
-            </script>
+           
         </ul>
     </div><!--/.sidebar-->
 
@@ -76,7 +73,20 @@
         @RenderBody()
     </div><!--/.main-->
     @RenderSection("Scripts", required: false) <!-- Thêm dòng này để render section Scripts -->
-
+    <script>
+        document.getElementById("logout-link").addEventListener("click", function (e) {
+            e.preventDefault();
+            fetch('@Url.Action("Logout", "Account")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                }
+            }).then(() => {
+                window.location.href = "/"; // Chuyển hướng sau khi logout
+            });
+        });
+    </script>
     <script src="~/js/jquery-1.11.1.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/chart.min.js"></script>
