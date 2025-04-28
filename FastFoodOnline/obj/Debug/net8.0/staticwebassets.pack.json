@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\FastFoodOnline.bundle.scp.css",
-      "PackagePath": "staticwebassets\\FastFoodOnline.bundle.scp.css"
-    },
-    {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\wwwroot\\assets\\css\\main.css",
       "PackagePath": "staticwebassets\\assets\\css\\main.css"
     },

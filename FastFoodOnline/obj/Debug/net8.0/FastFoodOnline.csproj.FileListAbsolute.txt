@@ -1074,9 +1074,7 @@ C:\Users\ADMIN\Source\Repos\FastFood\FastFoodOnline\obj\Debug\net8.0\staticwebas
 C:\Users\ADMIN\Source\Repos\FastFood\FastFoodOnline\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.FastFoodOnline.props
 C:\Users\ADMIN\Source\Repos\FastFood\FastFoodOnline\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.FastFoodOnline.props
 C:\Users\ADMIN\Source\Repos\FastFood\FastFoodOnline\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\ADMIN\Source\Repos\FastFood\FastFoodOnline\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\ADMIN\Source\Repos\FastFood\FastFoodOnline\obj\Debug\net8.0\scopedcss\bundle\FastFoodOnline.styles.css
-C:\Users\ADMIN\Source\Repos\FastFood\FastFoodOnline\obj\Debug\net8.0\scopedcss\projectbundle\FastFoodOnline.bundle.scp.css
 C:\Users\ADMIN\Source\Repos\FastFood\FastFoodOnline\obj\Debug\net8.0\FastFood.5C5CBEE9.Up2Date
 C:\Users\ADMIN\Source\Repos\FastFood\FastFoodOnline\obj\Debug\net8.0\FastFoodOnline.dll
 C:\Users\ADMIN\Source\Repos\FastFood\FastFoodOnline\obj\Debug\net8.0\refint\FastFoodOnline.dll

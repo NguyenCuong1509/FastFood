@@ -25,8 +25,5 @@ namespace FastFoodOnline.Models
         [Display(Name = "Ngày sinh")]
         public DateTime? NgaySinh { get; set; } // Ngày sinh
 
-        [StringLength(15)]
-        [Display(Name = "Số điện thoại")]
-        public string PhoneNumber { get; set; } // Số điện thoại
     }
 }
