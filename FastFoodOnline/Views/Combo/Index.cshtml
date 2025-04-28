@@ -18,6 +18,7 @@
             <th>Giá Gốc</th>
             <th>Giá Khuyến Mãi</th>
             <th>Món Ăn</th>
+            <th>Hình ảnh</th>
             @* <th>Hành Động</th> *@
         </tr>
     </thead>
@@ -27,6 +28,7 @@
             <tr>
                 <td>@combo.ComboId</td>
                 <td>@combo.TenCombo</td>
+               
                 <td><del>@combo.GiaGoc.ToString("N0") VND</del></td>
                 <td><strong>@combo.GiaKhuyenMai.ToString("N0") VND</strong></td>
                 <td>
@@ -36,6 +38,9 @@
                             <li>@item.MonAn.TenMon - SL: @item.SoLuong</li>
                         }
                     </ul>
+                </td>
+                <td>
+                    <img src="@combo.HinhAnh" alt="Hình ảnh món ăn" style="width: 100px; height: 100px; object-fit: cover;" />
                 </td>
                @*  <td>
                     <a asp-action="Edit" asp-route-id="@combo.ComboId" class="btn btn-warning btn-sm">Sửa</a>

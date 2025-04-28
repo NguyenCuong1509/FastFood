@@ -67,10 +67,20 @@ public IActionResult Search(string keyword)
 
         public IActionResult Detail(int id, string type)
         {
+            if (string.IsNullOrEmpty(type))
+            {
+                return BadRequest("Loại không hợp lệ.");
+            }
+
             if (type == "monan")
             {
-                var monAn = _context.MonAns.FirstOrDefault(m => m.MonAnId == id);
-                if (monAn == null) return NotFound();
+                var monAn = _context.MonAns
+                    .Include(m => m.LoaiMonAn)
+                    .FirstOrDefault(m => m.MonAnId == id);
+                if (monAn == null)
+                {
+                    return NotFound($"Không tìm thấy món ăn với ID {id}.");
+                }
                 return View("Details", monAn);
             }
             else if (type == "combo")
@@ -80,11 +90,16 @@ public IActionResult Search(string keyword)
                     .ThenInclude(mc => mc.MonAn) // Load thông tin chi tiết món ăn
                     .FirstOrDefault(c => c.ComboId == id);
 
-                if (combo == null) return NotFound();
+                if (combo == null)
+                {
+                    return NotFound($"Không tìm thấy combo với ID {id}.");
+                }
                 return View("DetailCombo", combo);
             }
-            return NotFound();
+
+            return BadRequest("Loại yêu cầu không hợp lệ.");
         }
+
 
     }
 }

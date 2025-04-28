@@ -6,24 +6,28 @@
 }
 
 <h2>@Model.TenMon</h2>
-<img src="@Model.HinhAnh" alt="@Model.TenMon" class="img-fluid">
+<!-- Hình ảnh nhỏ lại -->
+<img src="@Model.HinhAnh" alt="@Model.TenMon" class="img-fluid" style="max-width: 200px; height: auto;">
 
-<dt class="col-sm-4 text-secondary">Tên Món</dt>
-<dd class="col-sm-8 fw-bold">@Model.TenMon</dd>
+<dl class="row">
+    <dt class="col-sm-4 text-secondary">Tên Món</dt>
+    <dd class="col-sm-8 fw-bold">@Model.TenMon</dd>
 
-<dt class="col-sm-4 text-secondary">Giá</dt>
-<dd class="col-sm-8 text-danger fw-bold">
-    @(Model.Gia != null ? Model.Gia.ToString("N0") + " VNĐ" : "Không có")
-</dd>
+    <dt class="col-sm-4 text-secondary">Giá</dt>
+    <dd class="col-sm-8 text-danger fw-bold">
+        @(Model.Gia != null ? Model.Gia.ToString("N0") + " VNĐ" : "Không có")
+    </dd>
 
-<dt class="col-sm-4 text-secondary">Mô Tả</dt>
-<dd class="col-sm-8">
-    @(string.IsNullOrWhiteSpace(Model.MoTa) ? "Không có" : Model.MoTa)
-</dd>
+    <dt class="col-sm-4 text-secondary">Mô Tả</dt>
+    <dd class="col-sm-8">
+        @(string.IsNullOrWhiteSpace(Model.MoTa) ? "Không có" : Model.MoTa)
+    </dd>
 
-<dt class="col-sm-4 text-secondary">Loại Món Ăn</dt>
-<dd class="col-sm-8">
-    @(Model.LoaiMonAn != null ? $"{Model.LoaiMonAn.TenLoai}" : "Không có")
-</dd>
+    <dt class="col-sm-4 text-secondary">Loại Món Ăn</dt>
+    <dd class="col-sm-8">
+        @(Model.LoaiMonAn != null ? $"{Model.LoaiMonAn.TenLoai}" : "Không có")
+    </dd>
+</dl>
+
 <a asp-controller="GioHang" asp-action="ThemVaoGio" asp-route-monAnId="@Model.MonAnId" class="btn btn-success">Thêm vào giỏ</a>
 <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
