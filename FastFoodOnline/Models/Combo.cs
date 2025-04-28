@@ -23,7 +23,9 @@ namespace FastFoodOnline.Models
         [Range(1000, 1000000, ErrorMessage = "Giá gốc phải từ 1,000 đến 1,000,000")]
         [Display(Name = "Giá Gốc")]
         public decimal GiaGoc { get; set; }
-
+        [StringLength(255, ErrorMessage = "Đường dẫn hình ảnh không được quá 255 ký tự")]
+        [Display(Name = "Hình Ảnh Combo")]
+        public string? HinhAnh { get; set; } // Đường dẫn hình ảnh hoặc tên file ảnh
         [Display(Name = "Danh Sách Món Ăn Trong Combo")]
         public ICollection<MonAnCombo> MonAnCombos { get; set; } = new List<MonAnCombo>();
     }
