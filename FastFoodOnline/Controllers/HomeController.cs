@@ -49,8 +49,63 @@ namespace FastFoodOnline.Controllers
 
             return View(viewModel);
         }
+        public async Task<IActionResult> DanhSachSanPham(int page = 1, string searchQuery = null, int? loaiMonAnId = null)
+        {
+            int pageSize = 6;
 
-public IActionResult Search(string keyword)
+            // Query cho món ăn
+            var monAnQuery = _context.MonAns.AsQueryable();
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                monAnQuery = monAnQuery.Where(m => m.TenMon.Contains(searchQuery) || m.MoTa.Contains(searchQuery));
+            }
+            if (loaiMonAnId.HasValue)
+            {
+                monAnQuery = monAnQuery.Where(m => m.LoaiMonAnId == loaiMonAnId);
+            }
+
+            // Lấy danh sách món ăn liên quan đến combo
+            var monAnComboIds = await _context.MonAnCombos.Select(x => x.MonAnId).Distinct().ToListAsync();
+            monAnQuery = monAnQuery.Where(m => monAnComboIds.Contains(m.MonAnId));
+
+            var monAnList = await monAnQuery
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            // Query cho combo
+            var comboQuery = _context.Combos.AsQueryable();
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                comboQuery = comboQuery.Where(c => c.TenCombo.Contains(searchQuery));
+            }
+
+            var comboList = await comboQuery
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var viewModel = new HomeViewModel
+            {
+                MonAns = monAnList,
+                Combos = comboList,
+                CurrentPage = page,
+                TotalPages = (int)Math.Ceiling((double)await monAnQuery.CountAsync() / pageSize),
+                TotalPagesCombos = (int)Math.Ceiling((double)await comboQuery.CountAsync() / pageSize),
+                SearchQuery = searchQuery,
+                LoaiMonAnId = loaiMonAnId,
+                LoaiMonAns = await _context.LoaiMonAns.ToListAsync()
+            };
+
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView("_MonAnPartial", viewModel);
+            }
+
+            return View(viewModel);
+        }
+
+        public IActionResult Search(string keyword)
         {
             var viewModel = new HomeViewModel
             {

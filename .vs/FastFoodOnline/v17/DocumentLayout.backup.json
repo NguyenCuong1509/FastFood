@@ -3,16 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\models\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\models\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\controllers\\giohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\controllers\\giohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\views\\home\\danhsachsanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\views\\home\\danhsachsanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\models\\combo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\models\\combo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\models\\monan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\models\\monan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\views\\shared\\_banhang.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\views\\shared\\_banhang.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\controllers\\combocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\controllers\\combocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\views\\home\\detailcombo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\views\\home\\detailcombo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\views\\account\\edituser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -27,28 +59,8 @@
       "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\views\\account\\quanlytaikhoan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\controllers\\giohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\controllers\\giohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\views\\giohang\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\views\\giohang\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\views\\home\\_monanpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\views\\home\\_monanpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\models\\combo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\models\\combo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\views\\shared\\_banhang.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\views\\shared\\_banhang.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\models\\viewmodel\\profileviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -71,14 +83,6 @@
       "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\views\\home\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\views\\home\\detailcombo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\views\\home\\detailcombo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\models\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\models\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\views\\combo\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\views\\combo\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -97,10 +101,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\controllers\\monancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\controllers\\monancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\models\\monan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|solutionrelative:fastfoodonline\\models\\monan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{85ABBE34-B02D-4D5F-A8A7-25CD92C6974C}|FastFoodOnline\\FastFoodOnline.csproj|c:\\users\\admin\\source\\repos\\fastfood\\fastfoodonline\\controllers\\hoadoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -150,17 +150,16 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Home\\Index.cshtml",
               "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "FastFoodOnline\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAEwAAAAAAAAAAAAAAEIAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-04-28T14:26:51.031Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -168,33 +167,105 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "QuanLyTaiKhoan.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Account\\QuanLyTaiKhoan.cshtml",
-              "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Account\\QuanLyTaiKhoan.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Account\\QuanLyTaiKhoan.cshtml",
-              "RelativeToolTip": "FastFoodOnline\\Views\\Account\\QuanLyTaiKhoan.cshtml",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAQwG0AAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-28T14:20:19.475Z",
+              "DocumentIndex": 4,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "FastFoodOnline\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "FastFoodOnline\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAADMAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T08:29:36.211Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MonAn.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Models\\MonAn.cs",
+              "RelativeDocumentMoniker": "FastFoodOnline\\Models\\MonAn.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Models\\MonAn.cs",
+              "RelativeToolTip": "FastFoodOnline\\Models\\MonAn.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAADwvyMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-28T15:37:04.526Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Combo.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Models\\Combo.cs",
+              "RelativeDocumentMoniker": "FastFoodOnline\\Models\\Combo.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Models\\Combo.cs",
+              "RelativeToolTip": "FastFoodOnline\\Models\\Combo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T16:05:54.508Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GioHangController.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Controllers\\GioHangController.cs",
+              "RelativeDocumentMoniker": "FastFoodOnline\\Controllers\\GioHangController.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Controllers\\GioHangController.cs",
+              "RelativeToolTip": "FastFoodOnline\\Controllers\\GioHangController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-24T09:29:17.344Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HomeViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Models\\HomeViewModel.cs",
+              "RelativeDocumentMoniker": "FastFoodOnline\\Models\\HomeViewModel.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Models\\HomeViewModel.cs",
+              "RelativeToolTip": "FastFoodOnline\\Models\\HomeViewModel.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAuwAgAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-28T16:13:56.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "FastFoodOnline\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "FastFoodOnline\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T10:01:59.838Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "EditUser.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Account\\EditUser.cshtml",
-              "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Account\\EditUser.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Account\\EditUser.cshtml",
-              "RelativeToolTip": "FastFoodOnline\\Views\\Account\\EditUser.cshtml",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAwEgAAAABAAAAAAAAAA==",
+              "Title": "DanhSachSanPham.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Home\\DanhSachSanPham.cshtml",
+              "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Home\\DanhSachSanPham.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Home\\DanhSachSanPham.cshtml",
+              "RelativeToolTip": "FastFoodOnline\\Views\\Home\\DanhSachSanPham.cshtml",
+              "ViewState": "AgIAACgAAAAAAAAAAAAwwEYAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-27T16:40:12.816Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-29T09:33:03.988Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
+              "Title": "_banhang.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Shared\\_banhang.cshtml",
+              "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Shared\\_banhang.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Shared\\_banhang.cshtml",
+              "RelativeToolTip": "FastFoodOnline\\Views\\Shared\\_banhang.cshtml",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAAD8AAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-27T15:59:38.084Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "Profile.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Account\\Profile.cshtml",
               "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Account\\Profile.cshtml",
@@ -202,12 +273,23 @@
               "RelativeToolTip": "FastFoodOnline\\Views\\Account\\Profile.cshtml",
               "ViewState": "AgIAAF8AAAAAAAAAAAAAAGUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-27T16:19:55.948Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T16:19:55.948Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 10,
+              "Title": "DetailCombo.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Home\\DetailCombo.cshtml",
+              "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Home\\DetailCombo.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Home\\DetailCombo.cshtml",
+              "RelativeToolTip": "FastFoodOnline\\Views\\Home\\DetailCombo.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-24T09:32:34.08Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "ComboController.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Controllers\\ComboController.cs",
               "RelativeDocumentMoniker": "FastFoodOnline\\Controllers\\ComboController.cs",
@@ -215,61 +297,35 @@
               "RelativeToolTip": "FastFoodOnline\\Controllers\\ComboController.cs",
               "ViewState": "AgIAACQAAAAAAAAAAAAuwJcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-25T15:41:50.243Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "FastFoodOnline\\Controllers\\AccountController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "FastFoodOnline\\Controllers\\AccountController.cs",
-              "ViewState": "AgIAAF0AAAAAAAAAAAAkwHYAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T08:59:21.92Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Combo.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Models\\Combo.cs",
-              "RelativeDocumentMoniker": "FastFoodOnline\\Models\\Combo.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Models\\Combo.cs",
-              "RelativeToolTip": "FastFoodOnline\\Models\\Combo.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAgwBUAAABAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T16:05:54.508Z"
+              "WhenOpened": "2025-04-25T15:41:50.243Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "_banhang.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Shared\\_banhang.cshtml",
-              "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Shared\\_banhang.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Shared\\_banhang.cshtml",
-              "RelativeToolTip": "FastFoodOnline\\Views\\Shared\\_banhang.cshtml",
-              "ViewState": "AgIAAB8BAAAAAAAAAAAAACYAAAAHAAAAAAAAAA==",
+              "Title": "EditUser.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Account\\EditUser.cshtml",
+              "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Account\\EditUser.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Account\\EditUser.cshtml",
+              "RelativeToolTip": "FastFoodOnline\\Views\\Account\\EditUser.cshtml",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAwEgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-27T15:59:38.084Z"
+              "WhenOpened": "2025-04-27T16:40:12.816Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "_MonAnPartial.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Home\\_MonAnPartial.cshtml",
-              "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Home\\_MonAnPartial.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Home\\_MonAnPartial.cshtml",
-              "RelativeToolTip": "FastFoodOnline\\Views\\Home\\_MonAnPartial.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAXAAAAAAAAAA==",
+              "DocumentIndex": 13,
+              "Title": "QuanLyTaiKhoan.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Account\\QuanLyTaiKhoan.cshtml",
+              "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Account\\QuanLyTaiKhoan.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Account\\QuanLyTaiKhoan.cshtml",
+              "RelativeToolTip": "FastFoodOnline\\Views\\Account\\QuanLyTaiKhoan.cshtml",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAQwG0AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-28T16:04:47.415Z"
+              "WhenOpened": "2025-04-28T14:20:19.475Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 14,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\GioHang\\Index.cshtml",
               "RelativeDocumentMoniker": "FastFoodOnline\\Views\\GioHang\\Index.cshtml",
@@ -281,19 +337,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "GioHangController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Controllers\\GioHangController.cs",
-              "RelativeDocumentMoniker": "FastFoodOnline\\Controllers\\GioHangController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Controllers\\GioHangController.cs",
-              "RelativeToolTip": "FastFoodOnline\\Controllers\\GioHangController.cs",
-              "ViewState": "AgIAAGoAAAAAAAAAAAAkwH4AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T09:29:17.344Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "ApplicationUser.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Models\\ApplicationUser.cs",
               "RelativeDocumentMoniker": "FastFoodOnline\\Models\\ApplicationUser.cs",
@@ -305,19 +349,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "FastFoodOnline\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "FastFoodOnline\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAuwBIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T08:29:36.211Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 15,
               "Title": "ProfileViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Models\\ViewModel\\ProfileViewModel.cs",
               "RelativeDocumentMoniker": "FastFoodOnline\\Models\\ViewModel\\ProfileViewModel.cs",
@@ -329,7 +361,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 17,
               "Title": "Details.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Home\\Details.cshtml",
               "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Home\\Details.cshtml",
@@ -341,7 +373,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "Privacy.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Home\\Privacy.cshtml",
               "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Home\\Privacy.cshtml",
@@ -353,7 +385,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "Search.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Home\\Search.cshtml",
               "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Home\\Search.cshtml",
@@ -365,31 +397,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "DetailCombo.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Home\\DetailCombo.cshtml",
-              "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Home\\DetailCombo.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Home\\DetailCombo.cshtml",
-              "RelativeToolTip": "FastFoodOnline\\Views\\Home\\DetailCombo.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAwAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-24T09:32:34.08Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "HomeViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Models\\HomeViewModel.cs",
-              "RelativeDocumentMoniker": "FastFoodOnline\\Models\\HomeViewModel.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Models\\HomeViewModel.cs",
-              "RelativeToolTip": "FastFoodOnline\\Models\\HomeViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-28T16:13:56.797Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\MonAn\\Index.cshtml",
               "RelativeDocumentMoniker": "FastFoodOnline\\Views\\MonAn\\Index.cshtml",
@@ -401,7 +409,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Combo\\Index.cshtml",
               "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Combo\\Index.cshtml",
@@ -413,7 +421,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Combo\\Edit.cshtml",
               "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Combo\\Edit.cshtml",
@@ -425,7 +433,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Views\\Combo\\Create.cshtml",
               "RelativeDocumentMoniker": "FastFoodOnline\\Views\\Combo\\Create.cshtml",
@@ -437,7 +445,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "MonAnController.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Controllers\\MonAnController.cs",
               "RelativeDocumentMoniker": "FastFoodOnline\\Controllers\\MonAnController.cs",
@@ -458,18 +466,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-28T15:37:44.174Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "MonAn.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Models\\MonAn.cs",
-              "RelativeDocumentMoniker": "FastFoodOnline\\Models\\MonAn.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\FastFood\\FastFoodOnline\\Models\\MonAn.cs",
-              "RelativeToolTip": "FastFoodOnline\\Models\\MonAn.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAA+wBsAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-28T15:37:04.526Z"
             },
             {
               "$type": "Document",

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FastFoodOnline.Controllers
 {
-    [Authorize] // Chỉ cho phép người dùng đã đăng nhập
+    [Authorize]
     public class GioHangController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,15 +21,35 @@ namespace FastFoodOnline.Controllers
             _userManager = userManager;
         }
 
+        // Phương thức kiểm tra EmailConfirmed
+        private async Task<IActionResult> CheckEmailConfirmed()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("LoginUser", "Account");
+            }
+
+            if (!user.EmailConfirmed)
+            {
+                TempData["ErrorMessage"] = "Vui lòng xác nhận email trước khi sử dụng giỏ hàng.";
+                return RedirectToAction("EmailNotConfirmed", "Account"); // Chuyển hướng đến trang thông báo
+            }
+
+            return null; // Trả về null nếu email đã được xác nhận
+        }
+
         // Hiển thị giỏ hàng
         public async Task<IActionResult> Index()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null) return RedirectToAction("LoginUser", "Account");
+            // Kiểm tra EmailConfirmed
+            var emailCheckResult = await CheckEmailConfirmed();
+            if (emailCheckResult != null) return emailCheckResult;
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var gioHang = await _context.GioHangs
                 .Include(g => g.MonAnGioHangs).ThenInclude(mg => mg.MonAn)
-                .Include(g => g.ComboGioHangs).ThenInclude(cg => cg.Combo) // Thêm Include này
+                .Include(g => g.ComboGioHangs).ThenInclude(cg => cg.Combo)
                 .FirstOrDefaultAsync(g => g.UserId == userId);
 
             if (gioHang == null)
@@ -38,7 +58,7 @@ namespace FastFoodOnline.Controllers
                 {
                     UserId = userId,
                     MonAnGioHangs = new List<MonAnGioHang>(),
-                    ComboGioHangs = new List<ComboGioHang>() // Khởi tạo danh sách rỗng
+                    ComboGioHangs = new List<ComboGioHang>()
                 };
                 _context.GioHangs.Add(gioHang);
                 await _context.SaveChangesAsync();
@@ -47,14 +67,14 @@ namespace FastFoodOnline.Controllers
             return View(gioHang);
         }
 
-
         // Thêm món ăn vào giỏ hàng
         public async Task<IActionResult> ThemVaoGio(int monAnId)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null) return RedirectToAction("LoginUser", "Account");
+            // Kiểm tra EmailConfirmed
+            var emailCheckResult = await CheckEmailConfirmed();
+            if (emailCheckResult != null) return emailCheckResult;
 
-            // Kiểm tra món ăn có tồn tại không
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var monAn = await _context.MonAns.FindAsync(monAnId);
             if (monAn == null)
             {
@@ -62,7 +82,6 @@ namespace FastFoodOnline.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            // Kiểm tra giỏ hàng của user
             var gioHang = await _context.GioHangs
                 .Include(g => g.MonAnGioHangs)
                 .FirstOrDefaultAsync(g => g.UserId == userId);
@@ -73,7 +92,6 @@ namespace FastFoodOnline.Controllers
                 _context.GioHangs.Add(gioHang);
             }
 
-            // Kiểm tra món ăn đã có trong giỏ hàng chưa
             var monAnGioHang = gioHang.MonAnGioHangs.FirstOrDefault(m => m.MonAnId == monAnId);
             if (monAnGioHang != null)
             {
@@ -87,15 +105,58 @@ namespace FastFoodOnline.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+        // Thêm combo vào giỏ hàng
+        public async Task<IActionResult> ThemComboVaoGio(int comboId)
+        {
+            // Kiểm tra EmailConfirmed
+            var emailCheckResult = await CheckEmailConfirmed();
+            if (emailCheckResult != null) return emailCheckResult;
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var combo = await _context.Combos.FindAsync(comboId);
+            if (combo == null)
+            {
+                TempData["ErrorMessage"] = "Combo không tồn tại!";
+                return RedirectToAction("Index");
+            }
+
+            var gioHang = await _context.GioHangs
+                .Include(g => g.ComboGioHangs)
+                .FirstOrDefaultAsync(g => g.UserId == userId);
+
+            if (gioHang == null)
+            {
+                gioHang = new GioHang { UserId = userId, ComboGioHangs = new List<ComboGioHang>() };
+                _context.GioHangs.Add(gioHang);
+            }
+
+            var comboGioHang = gioHang.ComboGioHangs.FirstOrDefault(c => c.ComboId == comboId);
+            if (comboGioHang != null)
+            {
+                comboGioHang.SoLuong++;
+            }
+            else
+            {
+                gioHang.ComboGioHangs.Add(new ComboGioHang { ComboId = comboId, SoLuong = 1 });
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        // Cập nhật số lượng
         [HttpPost]
         public async Task<IActionResult> CapNhatGio(int? monAnId, int? comboId, int soLuong)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null) return RedirectToAction("LoginUser", "Account");
+            // Kiểm tra EmailConfirmed
+            var emailCheckResult = await CheckEmailConfirmed();
+            if (emailCheckResult != null) return emailCheckResult;
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var gioHang = await _context.GioHangs
                 .Include(g => g.MonAnGioHangs)
-                .Include(g => g.ComboGioHangs) // Thêm include cho ComboGioHangs
+                .Include(g => g.ComboGioHangs)
                 .FirstOrDefaultAsync(g => g.UserId == userId);
 
             if (gioHang == null)
@@ -105,7 +166,6 @@ namespace FastFoodOnline.Controllers
 
             if (monAnId.HasValue)
             {
-                // Cập nhật số lượng món ăn
                 var monAnGioHang = gioHang.MonAnGioHangs.FirstOrDefault(m => m.MonAnId == monAnId);
                 if (monAnGioHang != null)
                 {
@@ -114,7 +174,6 @@ namespace FastFoodOnline.Controllers
             }
             else if (comboId.HasValue)
             {
-                // Cập nhật số lượng combo
                 var comboGioHang = gioHang.ComboGioHangs.FirstOrDefault(c => c.ComboId == comboId);
                 if (comboGioHang != null)
                 {
@@ -126,12 +185,14 @@ namespace FastFoodOnline.Controllers
             return RedirectToAction("Index");
         }
 
-        // Xóa một món ăn khỏi giỏ hàng
+        // Xóa món ăn khỏi giỏ hàng
         public async Task<IActionResult> XoaKhoiGio(int monAnId)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null) return RedirectToAction("LoginUser", "Account");
+            // Kiểm tra EmailConfirmed
+            var emailCheckResult = await CheckEmailConfirmed();
+            if (emailCheckResult != null) return emailCheckResult;
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var gioHang = await _context.GioHangs
                 .Include(g => g.MonAnGioHangs)
                 .FirstOrDefaultAsync(g => g.UserId == userId);
@@ -149,35 +210,65 @@ namespace FastFoodOnline.Controllers
             return RedirectToAction("Index");
         }
 
+        // Xóa combo khỏi giỏ hàng
+        public async Task<IActionResult> XoaComboKhoiGio(int comboId)
+        {
+            // Kiểm tra EmailConfirmed
+            var emailCheckResult = await CheckEmailConfirmed();
+            if (emailCheckResult != null) return emailCheckResult;
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var gioHang = await _context.GioHangs
+                .Include(g => g.ComboGioHangs)
+                .FirstOrDefaultAsync(g => g.UserId == userId);
+
+            if (gioHang != null)
+            {
+                var comboGioHang = gioHang.ComboGioHangs.FirstOrDefault(c => c.ComboId == comboId);
+                if (comboGioHang != null)
+                {
+                    gioHang.ComboGioHangs.Remove(comboGioHang);
+                    await _context.SaveChangesAsync();
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
         // Xóa toàn bộ giỏ hàng
         public async Task<IActionResult> XoaTatCa()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null) return RedirectToAction("LoginUser", "Account");
+            // Kiểm tra EmailConfirmed
+            var emailCheckResult = await CheckEmailConfirmed();
+            if (emailCheckResult != null) return emailCheckResult;
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var gioHang = await _context.GioHangs
                 .Include(g => g.MonAnGioHangs)
+                .Include(g => g.ComboGioHangs)
                 .FirstOrDefaultAsync(g => g.UserId == userId);
 
             if (gioHang != null)
             {
                 gioHang.MonAnGioHangs.Clear();
+                gioHang.ComboGioHangs.Clear();
                 await _context.SaveChangesAsync();
             }
 
             return RedirectToAction("Index");
         }
+
         // Thanh toán giỏ hàng
         public async Task<IActionResult> ThanhToan()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null) return RedirectToAction("LoginUser", "Account");
+            // Kiểm tra EmailConfirmed
+            var emailCheckResult = await CheckEmailConfirmed();
+            if (emailCheckResult != null) return emailCheckResult;
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var gioHang = await _context.GioHangs
-                .Include(g => g.MonAnGioHangs)
-                .ThenInclude(mg => mg.MonAn)
-                .Include(g => g.ComboGioHangs)
-                .ThenInclude(cg => cg.Combo)
+                .Include(g => g.MonAnGioHangs).ThenInclude(mg => mg.MonAn)
+                .Include(g => g.ComboGioHangs).ThenInclude(cg => cg.Combo)
                 .FirstOrDefaultAsync(g => g.UserId == userId);
 
             if (gioHang == null || (gioHang.MonAnGioHangs.Count == 0 && gioHang.ComboGioHangs.Count == 0))
@@ -203,7 +294,6 @@ namespace FastFoodOnline.Controllers
                 }).ToList()
             };
 
-            // Thêm chi tiết đơn hàng cho combo
             foreach (var comboGioHang in gioHang.ComboGioHangs)
             {
                 hoaDon.HoaDonChiTiets.Add(new HoaDonChiTiet
@@ -217,7 +307,6 @@ namespace FastFoodOnline.Controllers
             _context.HoaDons.Add(hoaDon);
             await _context.SaveChangesAsync();
 
-            // Xóa giỏ hàng sau khi thanh toán thành công
             _context.MonAnGioHangs.RemoveRange(gioHang.MonAnGioHangs);
             _context.ComboGioHangs.RemoveRange(gioHang.ComboGioHangs);
             await _context.SaveChangesAsync();
@@ -226,118 +315,24 @@ namespace FastFoodOnline.Controllers
             return RedirectToAction("Index");
         }
 
+        // Hiển thị đơn hàng của tôi
         public async Task<IActionResult> DonHangCuaToi()
         {
+            // Kiểm tra EmailConfirmed
+            var emailCheckResult = await CheckEmailConfirmed();
+            if (emailCheckResult != null) return emailCheckResult;
+
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null) return RedirectToAction("LoginUser", "Account");
-
             var donHangs = await _context.HoaDons
-        .Where(h => h.UserId == userId)
-        .Include(h => h.HoaDonChiTiets)
-            .ThenInclude(ct => ct.MonAn)
-        .Include(h => h.HoaDonChiTiets)
-            .ThenInclude(ct => ct.Combo) // Đảm bảo lấy thông tin Combo
-        .ToListAsync();
-
+                .Where(h => h.UserId == userId)
+                .Include(h => h.HoaDonChiTiets)
+                    .ThenInclude(ct => ct.MonAn)
+                .Include(h => h.HoaDonChiTiets)
+                    .ThenInclude(ct => ct.Combo)
+                .OrderByDescending(h => h.NgayTao)
+                .ToListAsync();
 
             return View(donHangs);
         }
-        public async Task<IActionResult> ThemComboVaoGio(int comboId)
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null)
-            {
-                Console.WriteLine("Người dùng chưa đăng nhập.");
-                return RedirectToAction("LoginUser", "Account");
-            }
-
-            var combo = await _context.Combos.FindAsync(comboId);
-            if (combo == null)
-            {
-                Console.WriteLine("Combo không tồn tại! ID: " + comboId);
-                TempData["ErrorMessage"] = "Combo không tồn tại!";
-                return RedirectToAction("Index", "GioHang");
-
-            }
-
-            var gioHang = await _context.GioHangs
-                .Include(g => g.ComboGioHangs)
-                .FirstOrDefaultAsync(g => g.UserId == userId);
-
-            if (gioHang == null)
-            {
-                gioHang = new GioHang { UserId = userId, ComboGioHangs = new List<ComboGioHang>() };
-                _context.GioHangs.Add(gioHang);
-                Console.WriteLine("Giỏ hàng mới được tạo cho user " + userId);
-            }
-
-            if (gioHang.ComboGioHangs == null)
-            {
-                gioHang.ComboGioHangs = new List<ComboGioHang>();
-            }
-
-            var comboGioHang = gioHang.ComboGioHangs.FirstOrDefault(c => c.ComboId == comboId);
-            if (comboGioHang != null)
-            {
-                comboGioHang.SoLuong++;
-                Console.WriteLine("Tăng số lượng combo " + comboId);
-            }
-            else
-            {
-                gioHang.ComboGioHangs.Add(new ComboGioHang { ComboId = comboId, SoLuong = 1 });
-                Console.WriteLine("Thêm combo mới vào giỏ: " + comboId);
-            }
-
-            await _context.SaveChangesAsync();
-            Console.WriteLine("Lưu giỏ hàng thành công.");
-
-            return RedirectToAction("Index");
-        }
-
-
-        [HttpPost]
-        public async Task<IActionResult> CapNhatCombo(int comboId, int soLuong)
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null) return RedirectToAction("LoginUser", "Account");
-
-            var gioHang = await _context.GioHangs
-                .Include(g => g.ComboGioHangs)
-                .FirstOrDefaultAsync(g => g.UserId == userId);
-
-            if (gioHang != null)
-            {
-                var comboGioHang = gioHang.ComboGioHangs.FirstOrDefault(c => c.ComboId == comboId);
-                if (comboGioHang != null)
-                {
-                    comboGioHang.SoLuong = soLuong > 0 ? soLuong : 1;
-                    await _context.SaveChangesAsync();
-                }
-            }
-
-            return RedirectToAction("Index");
-        }
-        public async Task<IActionResult> XoaComboKhoiGio(int comboId)
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null) return RedirectToAction("LoginUser", "Account");
-
-            var gioHang = await _context.GioHangs
-                .Include(g => g.ComboGioHangs)
-                .FirstOrDefaultAsync(g => g.UserId == userId);
-
-            if (gioHang != null)
-            {
-                var comboGioHang = gioHang.ComboGioHangs.FirstOrDefault(c => c.ComboId == comboId);
-                if (comboGioHang != null)
-                {
-                    gioHang.ComboGioHangs.Remove(comboGioHang);
-                    await _context.SaveChangesAsync();
-                }
-            }
-
-            return RedirectToAction("Index");
-        }
-
     }
 }

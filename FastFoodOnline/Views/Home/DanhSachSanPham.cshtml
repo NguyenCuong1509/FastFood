@@ -1,5 +1,170 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    Layout = "~/Views/Shared/_nen.cshtml";
 }
+@model FastFoodOnline.Models.HomeViewModel
+<!-- Custom CSS for Carousel Navigation Buttons -->
+<style>
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 60px;
+        height: 60px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 30px;
+        height: 30px;
+        background-size: 100% 100%;
+        filter: brightness(0) invert(1);
+    }
+
+    .carousel-control-prev {
+        left: 10px;
+    }
+
+    .carousel-control-next {
+        right: 10px;
+    }
+</style>
+<!-- Form tìm kiếm -->
+<div class="container mb-4">
+    <form asp-action="DanhSachSanPham" method="get" id="searchForm">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="searchQuery"
+                           value="@Model.SearchQuery" placeholder="Tìm kiếm món ăn, combo...">
+                    <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" name="loaiMonAnId" onchange="this.form.submit()">
+                    <option value="">Tất cả loại món</option>
+                    @foreach (var loai in Model.LoaiMonAns)
+                    {
+                        <option value="@loai.LoaiMonAnId"
+                                selected="@(Model.LoaiMonAnId == loai.LoaiMonAnId)">
+                            @loai.TenLoai
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-outline-secondary w-100"
+                        onclick="window.location.href='@Url.Action("DanhSachSanPham")'">
+                    Làm mới
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<h4 class="text-center mb-4 fw-bold">Combo</h4>
+
+<!-- Carousel -->
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000" data-bs-wrap="true">
+    <div class="carousel-indicators">
+        @for (int i = 0; i < Math.Ceiling((double)Model.Combos.Count / 3); i++)
+        {
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")" aria-current="@(i == 0 ? "true" : "false")" aria-label="Slide @(i+1)"></button>
+        }
+    </div>
+    <div class="carousel-inner">
+        @for (int i = 0; i < Model.Combos.Count; i += 3)
+        {
+            <div class="carousel-item @(i == 0 ? "active" : "")">
+                <div class="row justify-content-center">
+                    @for (int j = i; j < i + 3 && j < Model.Combos.Count; j++)
+                    {
+                        var combo = Model.Combos[j];
+                        <div class="col-md-4 col-lg-4 mb-4">
+                            <div class="card h-100 shadow-sm border-0">
+                                <img src="@combo.HinhAnh" class="card-img-top" alt="@combo.TenCombo" style="height: 200px; object-fit: cover;">
+                                <div class="card-body d-flex flex-column">
+                                    <h3 class="card-title">@combo.TenCombo</h3>
+                                    <h4 class="card-text mb-1 text-muted">Giá Gốc: <s>@combo.GiaGoc VNĐ</s></h4>
+                                    <h4 class="card-text text-danger fw-bold">Khuyến Mãi: @combo.GiaKhuyenMai VNĐ</h4>
+                                    <a asp-action="Detail" asp-route-id="@combo.ComboId" asp-route-type="combo" class="btn btn-primary mt-auto w-100">Xem Chi Tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<h1 class="text-center"><strong>Menu</strong></h1>
+
+
+<!-- Món Ăn Section -->
+<h4 class="text-center mb-4 fw-bold">Món Ăn</h4>
+<div class="row">
+    @foreach (var item in Model.MonAns)
+    {
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+                <img src="@item.HinhAnh" class="card-img-top" alt="@item.TenMon" style="height: 200px; object-fit: cover;">
+                <div class="card-body d-flex flex-column">
+                    <h3 class="card-title">@item.TenMon</h3>
+                    <h4 class="card-text text-success fw-bold">Giá: @item.Gia VNĐ</h4>
+                    <a asp-action="Detail" asp-route-id="@item.MonAnId" asp-route-type="monan" class="btn btn-primary mt-auto w-100">Xem Chi Tiết</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Phân Trang -->
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a class="page-link ajax-pagination" data-page="@i" href="javascript:void(0);">@i</a>
+            </li>
+        }
+    </ul>
+</nav>
+<!-- JavaScript để xử lý tìm kiếm AJAX -->
+<script>
+    $(document).ready(function () {
+        $('.ajax-pagination').click(function (e) {
+            e.preventDefault();
+            var page = $(this).data('page');
+            var searchQuery = $('input[name="searchQuery"]').val();
+            var loaiMonAnId = $('select[name="loaiMonAnId"]').val();
+
+            $.ajax({
+                url: '@Url.Action("DanhSachSanPham")',
+                data: {
+                    page: page,
+                    searchQuery: searchQuery,
+                    loaiMonAnId: loaiMonAnId
+                },
+                type: 'GET',
+                success: function (data) {
+                    $('#content').html(data);
+                }
+            });
+        });
+    });
+</script>
