@@ -74,7 +74,6 @@
                 </td>
                 <td>@(user.EmailConfirmed ? "Đã kích hoạt" : "Chưa kích hoạt")</td>
                 <td>
-                <a asp-action="EditUser" asp-route-id="@user.Id" class="btn btn-warning">Sửa</a>
 
                     @if (user.EmailConfirmed)
                     {

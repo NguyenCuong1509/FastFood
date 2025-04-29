@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using FastFoodOnline.Data;
 using System.Data;
+using System.Security.Claims;
 
 namespace FastFoodOnline.Controllers
 {
@@ -49,7 +50,12 @@ namespace FastFoodOnline.Controllers
                     ModelState.AddModelError(nameof(login.Email), "Email không tồn tại.");
                     return View(login);
                 }
-
+                // Kiểm tra xem email đã được kích hoạt chưa
+                if (!appUser.EmailConfirmed)
+                {
+                    ModelState.AddModelError(nameof(login.Email), "Tài khoản của bạn chưa được kích hoạt. Vui lòng kiểm tra email để xác nhận.");
+                    return View(login);
+                }
                 await _signInManager.SignOutAsync();
                 var result = await _signInManager.PasswordSignInAsync(appUser, login.Password, false, false);
                 if (result.Succeeded)
@@ -109,7 +115,8 @@ namespace FastFoodOnline.Controllers
                     ThanhPho = model.ThanhPho,
                     GioiTinh = model.GioiTinh,
                     NgaySinh = model.NgaySinh,
-                    PhoneNumber = model.PhoneNumber
+                    PhoneNumber = model.PhoneNumber,
+                    EmailConfirmed = true
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -141,8 +148,10 @@ namespace FastFoodOnline.Controllers
         [Authorize(Roles = "Admin")] // Chỉ Admin mới có quyền truy cập
         public async Task<IActionResult> QuanLyTaiKhoan()
         {
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var users = await _userManager.Users
         .Where(u => u.Email != "admin@example.com") // Ẩn tài khoản admin
+        .Where(u => u.Id != currentUserId) // Ẩn tài khoản Admin đang đăng nhập
         .ToListAsync();
             var userRoles = new Dictionary<string, List<string>>();
 
@@ -275,37 +284,58 @@ namespace FastFoodOnline.Controllers
 
             return View(model);
         }
-
         [HttpPost]
         public async Task<IActionResult> EditUser(EditUserViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
             var user = await _userManager.FindByIdAsync(model.Id);
-            if (user == null) return NotFound();
+            if (user == null)
+            {
+                return NotFound();
+            }
 
+            // Cập nhật các thông tin người dùng
             user.PhoneNumber = model.PhoneNumber;
+            user.Email = model.Email; // Nếu cần cập nhật email
+            user.UserName = model.Email; // Nếu username liên kết với email
+            user.HoTen = model.HoTen;
+            user.DiaChi = model.DiaChi;
+            user.ThanhPho = model.ThanhPho;
+            user.GioiTinh = model.GioiTinh;
+            user.NgaySinh = model.NgaySinh;
 
             var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)
             {
                 TempData["Success"] = "Cập nhật tài khoản thành công!";
 
-                // Kiểm tra nếu user KHÔNG phải Admin => về trang Profile
+                // Lấy ID của người dùng đang đăng nhập
+                var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                // Nếu tài khoản được sửa là của người dùng đang đăng nhập, chuyển hướng về Profile
+                if (model.Id == currentUserId)
+                {
+                    return RedirectToAction("Profile", "Account");
+                }
+
+                // Nếu không phải tài khoản của người dùng đang đăng nhập, kiểm tra vai trò
                 var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
                 if (!isAdmin)
                 {
-                    return RedirectToAction("Profile");
+                    return RedirectToAction("Profile", "Account");
                 }
 
                 return RedirectToAction("QuanLyTaiKhoan");
             }
 
+            // Xử lý lỗi
             TempData["Error"] = string.Join(", ", result.Errors.Select(e => e.Description));
             return View(model);
         }
-
-
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> ChangeUserRole(string userId, string newRole)

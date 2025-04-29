@@ -6,6 +6,16 @@
 
 <h2>Chỉnh sửa tài khoản</h2>
 
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
 <form asp-action="EditUser" method="post">
     <input type="hidden" asp-for="Id" />
 
@@ -17,21 +27,25 @@
     <div class="mb-3">
         <label>Số điện thoại</label>
         <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
         <label>Họ và tên</label>
         <input asp-for="HoTen" class="form-control" required />
+        <span asp-validation-for="HoTen" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
         <label>Địa chỉ</label>
         <input asp-for="DiaChi" class="form-control" />
+        <span asp-validation-for="DiaChi" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
         <label>Thành phố</label>
         <input asp-for="ThanhPho" class="form-control" />
+        <span asp-validation-for="ThanhPho" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
@@ -41,13 +55,19 @@
             <option value="Nam">Nam</option>
             <option value="Nữ">Nữ</option>
         </select>
+        <span asp-validation-for="GioiTinh" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
         <label>Ngày sinh</label>
         <input asp-for="NgaySinh" type="date" class="form-control" />
+        <span asp-validation-for="NgaySinh" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-success">Lưu</button>
     <a asp-action="QuanLyTaiKhoan" class="btn btn-secondary">Hủy</a>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
