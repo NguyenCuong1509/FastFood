@@ -60,11 +60,13 @@
                     </span>
                 </a>
             </li>
-            <li>
-                <a href="#" id="logout-link" class="nav-link text-dark">
-                    <em class="fa fa-power-off">&nbsp;</em> Logout
-                </a>
-            </li>
+            <form asp-controller="Account" asp-action="Logout" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-link">
+                    <em class="fa fa-power-off"></em> Logout
+                </button>
+            </form>
+
+            
            
         </ul>
     </div><!--/.sidebar-->
@@ -73,20 +75,6 @@
         @RenderBody()
     </div><!--/.main-->
     @RenderSection("Scripts", required: false) <!-- Thêm dòng này để render section Scripts -->
-    <script>
-        document.getElementById("logout-link").addEventListener("click", function (e) {
-            e.preventDefault();
-            fetch('@Url.Action("Logout", "Account")', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
-                }
-            }).then(() => {
-                window.location.href = "/"; // Chuyển hướng sau khi logout
-            });
-        });
-    </script>
     <script src="~/js/jquery-1.11.1.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/chart.min.js"></script>

@@ -1,41 +1,25 @@
 ﻿@model FastFoodOnline.Models.HomeViewModel
 
-<h4 class="text-center mb-4" style="font-family: Arial, sans-serif; font-size: 1.5rem;">Combo</h4>
-<div class="row">
-    @foreach (var combo in Model.Combos)
-    {
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <img src="@combo.HinhAnh" class="card-img-top" alt="@combo.TenCombo" style="height: 200px; object-fit: cover;">
-                    <h5 class="card-title" style="font-family: Arial, sans-serif;">@combo.TenCombo</h5>
-                    <h4 class="card-text" style="font-family: Arial, sans-serif;">Giá Gốc: <s>@combo.GiaGoc VNĐ</s></h4>
-                    <h4 class="card-text" style="font-family: Arial, sans-serif;">Khuyến Mãi: <b>@combo.GiaKhuyenMai VNĐ</b></h4>
-                    <a asp-action="Detail" asp-route-id="@combo.ComboId" asp-route-type="combo" class="btn btn-primary">Xem Chi Tiết</a>
-                </div>
-            </div>
-        </div>
-    }
-</div>
 
-<h4 class="text-center mb-4" style="font-family: Arial, sans-serif; font-size: 1.5rem;">Món Ăn</h4>
+<!-- Món Ăn Section -->
+<h4 class="text-center mb-4 fw-bold">Món Ăn</h4>
 <div class="row">
     @foreach (var item in Model.MonAns)
     {
-        <div class="col-md-4">
-            <div class="card mb-3">
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
                 <img src="@item.HinhAnh" class="card-img-top" alt="@item.TenMon" style="height: 200px; object-fit: cover;">
-                <div class="card-body">
-                    <h5 class="card-title" style="font-family: Arial, sans-serif;">@item.TenMon</h5>
-                    <h4 class="card-text" style="font-family: Arial, sans-serif;">Giá: @item.Gia VNĐ</h4>
-                    <a asp-action="Detail" asp-route-id="@item.MonAnId" asp-route-type="monan" class="btn btn-primary">Xem Chi Tiết</a>
+                <div class="card-body d-flex flex-column">
+                    <h3 class="card-title">@item.TenMon</h3>
+                    <h4 class="card-text text-success fw-bold">Giá: @item.Gia VNĐ</h4>
+                    <a asp-action="Detail" asp-route-id="@item.MonAnId" asp-route-type="monan" class="btn btn-primary mt-auto w-100">Xem Chi Tiết</a>
                 </div>
             </div>
         </div>
     }
 </div>
 
-<!-- Phân trang không reset trang -->
+<!-- Phân Trang -->
 <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center">
         @for (int i = 1; i <= Model.TotalPages; i++)

@@ -48,32 +48,42 @@
     <!-- Bảng Combo -->
     @if (Model.ComboGioHangs != null && Model.ComboGioHangs.Any())
     {
-        <h3>Combo</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Tên Combo</th>
-                    <th>Giá</th>
-                    <th>Số lượng</th>
-                    <th>Tổng</th>
-                    <th>Thao tác</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.ComboGioHangs)
-                {
+        <!-- Bảng Combo -->
+        @if (Model.ComboGioHangs != null && Model.ComboGioHangs.Any())
+        {
+            <h3>Combo</h3>
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>@item.Combo.TenCombo</td>
-                        <td>@item.Combo.GiaKhuyenMai.ToString("C")</td>
-                        <td>@item.SoLuong</td>
-                        <td>@(item.SoLuong * item.Combo.GiaKhuyenMai)</td>
-                        <td>
-                            <a asp-action="XoaComboKhoiGio" asp-route-comboId="@item.ComboId" class="btn btn-danger btn-sm">Xóa</a>
-                        </td>
+                        <th>Tên Combo</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Tổng</th>
+                        <th>Thao tác</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ComboGioHangs)
+                    {
+                        <tr>
+                            <td>@item.Combo.TenCombo</td>
+                            <td>@item.Combo.GiaKhuyenMai.ToString("C")</td>
+                            <td>
+                                <form asp-action="CapNhatGio" method="post">
+                                    <input type="hidden" name="comboId" value="@item.ComboId" />
+                                    <input type="number" name="soLuong" value="@item.SoLuong" min="1" class="form-control" style="width: 60px; display: inline-block;" />
+                                    <button type="submit" class="btn btn-primary btn-sm">Cập Nhật</button>
+                                </form>
+                            </td>
+                            <td>@(item.SoLuong * item.Combo.GiaKhuyenMai)</td>
+                            <td>
+                                <a asp-action="XoaComboKhoiGio" asp-route-comboId="@item.ComboId" class="btn btn-danger btn-sm">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
     }
 
     <a asp-controller="GioHang" asp-action="XoaTatCa" class="btn btn-warning">Xóa Tất Cả</a>

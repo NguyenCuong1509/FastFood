@@ -87,31 +87,44 @@ namespace FastFoodOnline.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-
-        // Cập nhật số lượng món ăn
         [HttpPost]
-        public async Task<IActionResult> CapNhatGio(int monAnId, int soLuong)
+        public async Task<IActionResult> CapNhatGio(int? monAnId, int? comboId, int soLuong)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null) return RedirectToAction("LoginUser", "Account");
 
             var gioHang = await _context.GioHangs
                 .Include(g => g.MonAnGioHangs)
+                .Include(g => g.ComboGioHangs) // Thêm include cho ComboGioHangs
                 .FirstOrDefaultAsync(g => g.UserId == userId);
 
-            if (gioHang != null)
+            if (gioHang == null)
             {
+                return NotFound("Không tìm thấy giỏ hàng.");
+            }
+
+            if (monAnId.HasValue)
+            {
+                // Cập nhật số lượng món ăn
                 var monAnGioHang = gioHang.MonAnGioHangs.FirstOrDefault(m => m.MonAnId == monAnId);
                 if (monAnGioHang != null)
                 {
                     monAnGioHang.SoLuong = soLuong > 0 ? soLuong : 1;
-                    await _context.SaveChangesAsync();
+                }
+            }
+            else if (comboId.HasValue)
+            {
+                // Cập nhật số lượng combo
+                var comboGioHang = gioHang.ComboGioHangs.FirstOrDefault(c => c.ComboId == comboId);
+                if (comboGioHang != null)
+                {
+                    comboGioHang.SoLuong = soLuong > 0 ? soLuong : 1;
                 }
             }
 
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-
 
         // Xóa một món ăn khỏi giỏ hàng
         public async Task<IActionResult> XoaKhoiGio(int monAnId)
