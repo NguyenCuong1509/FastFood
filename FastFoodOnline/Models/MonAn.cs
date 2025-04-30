@@ -31,5 +31,10 @@ namespace FastFoodOnline.Models
         [ForeignKey("LoaiMonAnId")]
         [Display(Name = "Loại Món Ăn")]
         public LoaiMonAn? LoaiMonAn { get; set; }
+
+        [Required(ErrorMessage = "Số lượng tồn kho không được để trống!")]
+        [Range(0, int.MaxValue, ErrorMessage = "Số lượng tồn kho không được âm")]
+        [Display(Name = "Số Lượng Tồn Kho")]
+        public int SoLuongTonKho { get; set; }
     }
 }

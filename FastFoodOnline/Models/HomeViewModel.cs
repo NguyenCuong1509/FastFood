@@ -10,5 +10,7 @@
         public string SearchQuery { get; set; } // Thêm trường tìm kiếm
         public int? LoaiMonAnId { get; set; } // Lọc theo loại món ăn
         public List<LoaiMonAn> LoaiMonAns { get; set; } // Danh sách loại món ăn
+        public Dictionary<int, string> MonAnTrangThai { get; set; } // Trạng thái món ăn
+        public Dictionary<int, string> ComboTrangThai { get; set; } // Trạng thái combo
     }
 }

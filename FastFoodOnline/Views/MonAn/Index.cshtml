@@ -9,53 +9,36 @@
 
 <p>
     <a asp-action="Create" class="btn btn-primary">Tạo món</a>
-   @*  <a asp-action="RollbackEdit" asp-route-id="@item.MonAnId" class="btn btn-warning">↩️ Rollback</a> *@
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TenMon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MoTa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HinhAnh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LoaiMonAn)
-            </th>
+            <th>@Html.DisplayNameFor(model => model.TenMon)</th>
+            <th>@Html.DisplayNameFor(model => model.Gia)</th>
+            <th>@Html.DisplayNameFor(model => model.MoTa)</th>
+            <th>@Html.DisplayNameFor(model => model.HinhAnh)</th>
+            <th>@Html.DisplayNameFor(model => model.LoaiMonAn)</th>
+            <th>@Html.DisplayNameFor(model => model.SoLuongTonKho)</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenMon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MoTa)
-            </td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.TenMon)</td>
+                <td>@Html.DisplayFor(modelItem => item.Gia)</td>
+                <td>@Html.DisplayFor(modelItem => item.MoTa)</td>
                 <td>
                     <img src="@item.HinhAnh" alt="Hình ảnh món ăn" style="width: 100px; height: 100px; object-fit: cover;" />
                 </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.LoaiMonAn.TenLoai)
-            </td>
-            <td>
+                <td>@Html.DisplayFor(modelItem => item.LoaiMonAn.TenLoai)</td>
+                <td>@Html.DisplayFor(modelItem => item.SoLuongTonKho)</td>
+                <td>
                     <a asp-action="Edit" asp-route-id="@item.MonAnId" class="btn btn-warning">Sửa thông tin</a>
-                <a asp-action="Details" asp-route-id="@item.MonAnId" class="btn btn-primary">Chi tiết món ăn</a> 
-            </td>
-        </tr>
-}
+                    <a asp-action="Details" asp-route-id="@item.MonAnId" class="btn btn-primary">Chi tiết món ăn</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

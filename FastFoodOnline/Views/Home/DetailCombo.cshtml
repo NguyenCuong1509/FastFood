@@ -1,30 +1,88 @@
 ﻿@model FastFoodOnline.Models.Combo
-
 @{
     ViewData["Title"] = "Chi Tiết Combo";
     Layout = "~/Views/Shared/_nen.cshtml";
 }
 
-<h2>@Model.TenCombo</h2>
-<p><b>Giá Gốc:</b> <s>@Model.GiaGoc.ToString("N0") VNĐ</s></p>
-<p><b>Khuyến Mãi:</b> <span class="text-danger fw-bold">@Model.GiaKhuyenMai.ToString("N0") VNĐ</span></p>
+<div class="container mt-4">
+    <div class="card shadow-lg rounded p-4">
+        <h2 class="text-center text-primary">@Model.TenCombo</h2>
+        <hr />
 
-<h4>Danh Sách Món Ăn Trong Combo:</h4>
-<div class="row">
-    @foreach (var monAnCombo in Model.MonAnCombos)
-    {
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <img src="@monAnCombo.MonAn.HinhAnh" class="card-img-top" alt="@monAnCombo.MonAn.TenMon" style="height: 200px; object-fit: cover;">
-                <div class="card-body">
-                    <h5 class="card-title">@monAnCombo.MonAn.TenMon</h5>
-                    <p class="card-text text-danger fw-bold">@monAnCombo.MonAn.Gia.ToString("N0") VNĐ</p>
+        <div class="row">
+            <div class="col-md-5 text-center">
+                <img src="@Model.HinhAnh" alt="@Model.TenCombo" class="img-fluid img-thumbnail shadow-sm rounded"
+                     style="max-width: 200px; height: auto; object-fit: cover;">
+            </div>
+
+            <div class="col-md-7">
+                <dl class="row">
+                    <dt class="col-sm-4 text-secondary">Tên Combo</dt>
+                    <dd class="col-sm-8 fw-bold">@Model.TenCombo</dd>
+
+                    <dt class="col-sm-4 text-secondary">Giá Gốc</dt>
+                    <dd class="col-sm-8 text-muted"><s>@Model.GiaGoc.ToString("N0") VNĐ</s></dd>
+
+                    <dt class="col-sm-4 text-secondary">Giá Khuyến Mãi</dt>
+                    <dd class="col-sm-8 text-danger fw-bold">@Model.GiaKhuyenMai.ToString("N0") VNĐ</dd>
+
+                    <dt class="col-sm-4 text-secondary">Trạng Thái</dt>
+                    <dd class="col-sm-8 fw-bold @ViewBag.TrangThai.ToLower().Replace(" ", "-")">
+                        @ViewBag.TrangThai
+                    </dd>
+
+                    <dt class="col-sm-4 text-secondary">Món Ăn Trong Combo</dt>
+                    <dd class="col-sm-8">
+                        <ul>
+                            @foreach (var monAnCombo in Model.MonAnCombos)
+                            {
+                                <li>@monAnCombo.MonAn.TenMon (Số lượng: @monAnCombo.SoLuong)</li>
+                            }
+                        </ul>
+                    </dd>
+                </dl>
+
+                <div class="mt-4">
+                    <a asp-controller="GioHang" asp-action="ThemComboVaoGio" asp-route-comboId="@Model.ComboId"
+                       class="btn btn-success @(ViewBag.TrangThai == "Hết hàng" ? "disabled" : "")">
+                        Thêm vào giỏ
+                    </a>
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">⬅️ Quay lại</a>
                 </div>
             </div>
         </div>
-    }
+
+        <h4 class="mt-4">Danh Sách Món Ăn Trong Combo</h4>
+        <div class="row">
+            @foreach (var monAnCombo in Model.MonAnCombos)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="@monAnCombo.MonAn.HinhAnh" class="card-img-top" alt="@monAnCombo.MonAn.TenMon" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">@monAnCombo.MonAn.TenMon</h5>
+                            <p class="card-text text-danger fw-bold">@monAnCombo.MonAn.Gia.ToString("N0") VNĐ</p>
+                            <p class="card-text fw-bold @((ViewBag.MonAnTrangThai as Dictionary<int, string>).ContainsKey(monAnCombo.MonAnId) ? (ViewBag.MonAnTrangThai as Dictionary<int, string>)[monAnCombo.MonAnId].ToLower().Replace(" ", "-") : "")">
+                                Trạng thái: @((ViewBag.MonAnTrangThai as Dictionary<int, string>).ContainsKey(monAnCombo.MonAnId) ? (ViewBag.MonAnTrangThai as Dictionary<int, string>)[monAnCombo.MonAnId] : "Không xác định")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </div>
-<a asp-controller="GioHang" asp-action="ThemComboVaoGio" asp-route-comboId="@Model.ComboId" class="btn btn-success">
-    Thêm vào giỏ
-</a>
-<a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+
+<style>
+    .còn-hàng {
+        color: green;
+    }
+
+    .sắp-hết-hàng {
+        color: orange;
+    }
+
+    .hết-hàng {
+        color: red;
+    }
+</style>

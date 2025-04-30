@@ -1,33 +1,68 @@
 ﻿@model FastFoodOnline.Models.MonAn
-
 @{
     ViewData["Title"] = "Chi Tiết Món Ăn";
     Layout = "~/Views/Shared/_nen.cshtml";
 }
 
-<h2>@Model.TenMon</h2>
-<!-- Hình ảnh nhỏ lại -->
-<img src="@Model.HinhAnh" alt="@Model.TenMon" class="img-fluid" style="max-width: 200px; height: auto;">
+<div class="container mt-4">
+    <div class="card shadow-lg rounded p-4">
+        <h2 class="text-center text-primary">@Model.TenMon</h2>
+        <hr />
 
-<dl class="row">
-    <dt class="col-sm-4 text-secondary">Tên Món</dt>
-    <dd class="col-sm-8 fw-bold">@Model.TenMon</dd>
+        <div class="row">
+            <div class="col-md-5 text-center">
+                <img src="@Model.HinhAnh" alt="@Model.TenMon" class="img-fluid img-thumbnail shadow-sm rounded"
+                     style="max-width: 200px; height: auto; object-fit: cover;">
+            </div>
 
-    <dt class="col-sm-4 text-secondary">Giá</dt>
-    <dd class="col-sm-8 text-danger fw-bold">
-        @(Model.Gia != null ? Model.Gia.ToString("N0") + " VNĐ" : "Không có")
-    </dd>
+            <div class="col-md-7">
+                <dl class="row">
+                    <dt class="col-sm-4 text-secondary">Tên Món</dt>
+                    <dd class="col-sm-8 fw-bold">@Model.TenMon</dd>
 
-    <dt class="col-sm-4 text-secondary">Mô Tả</dt>
-    <dd class="col-sm-8">
-        @(string.IsNullOrWhiteSpace(Model.MoTa) ? "Không có" : Model.MoTa)
-    </dd>
+                    <dt class="col-sm-4 text-secondary">Giá</dt>
+                    <dd class="col-sm-8 text-danger fw-bold">
+                        @(Model.Gia != null ? Model.Gia.ToString("N0") + " VNĐ" : "Không có")
+                    </dd>
 
-    <dt class="col-sm-4 text-secondary">Loại Món Ăn</dt>
-    <dd class="col-sm-8">
-        @(Model.LoaiMonAn != null ? $"{Model.LoaiMonAn.TenLoai}" : "Không có")
-    </dd>
-</dl>
+                    <dt class="col-sm-4 text-secondary">Mô Tả</dt>
+                    <dd class="col-sm-8">
+                        @(string.IsNullOrWhiteSpace(Model.MoTa) ? "Không có" : Model.MoTa)
+                    </dd>
 
-<a asp-controller="GioHang" asp-action="ThemVaoGio" asp-route-monAnId="@Model.MonAnId" class="btn btn-success">Thêm vào giỏ</a>
-<a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+                    <dt class="col-sm-4 text-secondary">Loại Món Ăn</dt>
+                    <dd class="col-sm-8">
+                        @(Model.LoaiMonAn != null ? $"{Model.LoaiMonAn.TenLoai}" : "Không có")
+                    </dd>
+
+                    <dt class="col-sm-4 text-secondary">Trạng Thái</dt>
+                    <dd class="col-sm-8 fw-bold @ViewBag.TrangThai.ToLower().Replace(" ", "-")">
+                        @ViewBag.TrangThai
+                    </dd>
+                </dl>
+
+                <div class="mt-4">
+                    <a asp-controller="GioHang" asp-action="ThemVaoGio" asp-route-monAnId="@Model.MonAnId"
+                       class="btn btn-success @(ViewBag.TrangThai == "Hết hàng" ? "disabled" : "")">
+                        Thêm vào giỏ
+                    </a>
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">⬅️ Quay lại</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .còn-hàng {
+        color: green;
+    }
+
+    .sắp-hết-hàng {
+        color: orange;
+    }
+
+    .hết-hàng {
+        color: red;
+    }
+</style>

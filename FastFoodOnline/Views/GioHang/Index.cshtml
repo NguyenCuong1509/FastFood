@@ -1,81 +1,130 @@
 ﻿@model FastFoodOnline.Models.GioHang
-
 @{
     ViewData["Title"] = "Giỏ Hàng";
     Layout = "~/Views/Shared/_nen.cshtml";
 }
-<h2>Giỏ Hàng</h2>
 
-@if ((Model.MonAnGioHangs != null && Model.MonAnGioHangs.Any()) || (Model.ComboGioHangs != null && Model.ComboGioHangs.Any()))
-{
-    <!-- Bảng Món Ăn -->
-    @if (Model.MonAnGioHangs != null && Model.MonAnGioHangs.Any())
+<div class="container mt-4">
+    <h2 class="text-center text-primary mb-4">Giỏ Hàng Của Bạn</h2>
+
+    @if (TempData["ErrorMessage"] != null)
     {
-        <h3>Món Ăn</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Món Ăn</th>
-                    <th>Giá</th>
-                    <th>Số Lượng</th>
-                    <th>Tổng</th>
-                    <th>Hành Động</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.MonAnGioHangs)
-                {
-                    <tr>
-                        <td>@item.MonAn.TenMon</td>
-                        <td>@item.MonAn.Gia.ToString("C")</td>
-                        <td>
-                            <form asp-action="CapNhatGio" method="post">
-                                <input type="hidden" name="monAnId" value="@item.MonAnId" />
-                                <input type="number" name="soLuong" value="@item.SoLuong" min="1" class="form-control" style="width: 60px; display: inline-block;" />
-                                <button type="submit" class="btn btn-primary btn-sm">Cập Nhật</button>
-                            </form>
-                        </td>
-                        <td>@(item.MonAn.Gia * item.SoLuong)</td>
-                        <td>
-                            <a asp-action="XoaKhoiGio" asp-route-monAnId="@item.MonAnId" class="btn btn-danger btn-sm">Xóa</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
     }
 
-    <!-- Bảng Combo -->
-    @if (Model.ComboGioHangs != null && Model.ComboGioHangs.Any())
+    @if ((Model.MonAnGioHangs != null && Model.MonAnGioHangs.Any()) || (Model.ComboGioHangs != null && Model.ComboGioHangs.Any()))
     {
+        <!-- Bảng Món Ăn -->
+        @if (Model.MonAnGioHangs != null && Model.MonAnGioHangs.Any())
+        {
+            <h3>Món Ăn</h3>
+            <table class="table table-bordered table-hover">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Món Ăn</th>
+                        <th>Hình Ảnh</th>
+                        <th>Giá</th>
+                        <th>Tồn Kho</th>
+                        <th>Số Lượng</th>
+                        <th>Tổng</th>
+                        <th>Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.MonAnGioHangs)
+                    {
+                        var trangThai = item.MonAn.SoLuongTonKho switch
+                        {
+                            0 => "Hết hàng",
+                            < 10 => "Sắp hết hàng",
+                            _ => "Còn hàng"
+                        };
+                        <tr>
+                            <td>@item.MonAn.TenMon</td>
+                            <td>
+                                <img src="@item.MonAn.HinhAnh" alt="@item.MonAn.TenMon" style="width: 100px; height: auto; object-fit: cover;" />
+                            </td>
+                            <td>@item.MonAn.Gia.ToString("N0") VNĐ</td>
+                            <td class="@trangThai.ToLower().Replace(" ", "-")">
+                                @item.MonAn.SoLuongTonKho (@trangThai)
+                            </td>
+                            <td>
+                                <form asp-action="CapNhatGio" method="post">
+                                    <input type="hidden" name="monAnId" value="@item.MonAnId" />
+                                    <input type="number" name="soLuong" value="@item.SoLuong" min="1" max="@item.MonAn.SoLuongTonKho"
+                                           class="form-control d-inline-block" style="width: 80px;" onchange="this.form.submit()" />
+                                </form>
+                            </td>
+                            <td>@((item.MonAn.Gia * item.SoLuong).ToString("N0")) VNĐ</td>
+
+                            <td>
+                                <a asp-action="XoaKhoiGio" asp-route-monAnId="@item.MonAnId" class="btn btn-danger btn-sm">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
         <!-- Bảng Combo -->
         @if (Model.ComboGioHangs != null && Model.ComboGioHangs.Any())
         {
             <h3>Combo</h3>
-            <table class="table">
-                <thead>
+            <table class="table table-bordered table-hover">
+                <thead class="table-primary">
                     <tr>
                         <th>Tên Combo</th>
+                        <th>Hình Ảnh</th>
                         <th>Giá</th>
-                        <th>Số lượng</th>
+                        <th>Tồn Kho</th>
+                        <th>Số Lượng</th>
                         <th>Tổng</th>
-                        <th>Thao tác</th>
+                        <th>Thao Tác</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.ComboGioHangs)
                     {
+                        var maxSoLuong = item.Combo.MonAnCombos.Any()
+                            ? item.Combo.MonAnCombos.Min(mc => mc.MonAn.SoLuongTonKho / mc.SoLuong)
+                            : 0;
+                        var trangThai = maxSoLuong switch
+                        {
+                            0 => "Hết hàng",
+                            < 10 => "Sắp hết hàng",
+                            _ => "Còn hàng"
+                        };
                         <tr>
                             <td>@item.Combo.TenCombo</td>
-                            <td>@item.Combo.GiaKhuyenMai.ToString("C")</td>
+                            <td>
+                                <img src="@item.Combo.HinhAnh" alt="@item.Combo.TenCombo" style="width: 100px; height: auto; object-fit: cover;" />
+                            </td>
+                            <td>@item.Combo.GiaKhuyenMai.ToString("N0") VNĐ</td>
+                            <td class="@trangThai.ToLower().Replace(" ", "-")">
+                                @foreach (var monAnCombo in item.Combo.MonAnCombos)
+                                {
+                                    var monAnTrangThai = monAnCombo.MonAn.SoLuongTonKho switch
+                                    {
+                                        0 => "Hết hàng",
+                                        < 10 => "Sắp hết hàng",
+                                        _ => "Còn hàng"
+                                    };
+                                    <div>@monAnCombo.MonAn.TenMon: @monAnCombo.MonAn.SoLuongTonKho (@monAnTrangThai)</div>
+                                }
+                            </td>
                             <td>
                                 <form asp-action="CapNhatGio" method="post">
                                     <input type="hidden" name="comboId" value="@item.ComboId" />
-                                    <input type="number" name="soLuong" value="@item.SoLuong" min="1" class="form-control" style="width: 60px; display: inline-block;" />
-                                    <button type="submit" class="btn btn-primary btn-sm">Cập Nhật</button>
+                                    <input type="number" name="soLuong" value="@item.SoLuong" min="1" max="@maxSoLuong"
+                                           class="form-control d-inline-block" style="width: 80px;" onchange="this.form.submit()" />
                                 </form>
                             </td>
-                            <td>@(item.SoLuong * item.Combo.GiaKhuyenMai)</td>
+                            <td>@((item.SoLuong * item.Combo.GiaKhuyenMai).ToString("N0")) VNĐ</td>
+
                             <td>
                                 <a asp-action="XoaComboKhoiGio" asp-route-comboId="@item.ComboId" class="btn btn-danger btn-sm">Xóa</a>
                             </td>
@@ -84,14 +133,32 @@
                 </tbody>
             </table>
         }
-    }
 
-    <a asp-controller="GioHang" asp-action="XoaTatCa" class="btn btn-warning">Xóa Tất Cả</a>
-    <a asp-controller="GioHang" asp-action="ThanhToan" class="btn btn-success">Thanh Toán</a>
-    <a asp-controller="GioHang" asp-action="DonHangCuaToi" class="btn btn-primary">Xem Đơn Hàng</a>
-}
-else
-{
-    <p>Giỏ hàng của bạn đang trống.</p>
-    <a asp-controller="GioHang" asp-action="DonHangCuaToi" class="btn btn-primary">Xem Đơn Hàng</a>
-}
+        <div class="text-end mt-4">
+            <h4>
+                Tổng tiền: @(
+            (Model.MonAnGioHangs.Sum(mg => mg.MonAn.Gia * mg.SoLuong)
+            + Model.ComboGioHangs.Sum(cg => cg.Combo.GiaKhuyenMai * cg.SoLuong)
+            ).ToString("N0")
+            ) VNĐ
+            </h4>
+
+            <a asp-action="ThanhToan" class="btn btn-success">Thanh Toán</a>
+            <a asp-action="XoaTatCa" class="btn btn-warning">Xóa Tất Cả</a>
+            <a asp-action="DonHangCuaToi" class="btn btn-primary">Xem Đơn Hàng</a>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            Giỏ hàng của bạn đang trống. <a asp-controller="Home" asp-action="Index" class="alert-link">Tiếp tục mua sắm</a>.
+        </div>
+        <a asp-action="DonHangCuaToi" class="btn btn-primary">Xem Đơn Hàng</a>
+    }
+</div>
+
+<style>
+    .còn-hàng { color: green; }
+    .sắp-hết-hàng { color: orange; }
+    .hết-hàng { color: red; }
+</style>

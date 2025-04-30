@@ -51,7 +51,7 @@ namespace FastFoodOnline.Controllers
         // POST: Tạo món ăn
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TenMon,Gia,MoTa,HinhAnh,LoaiMonAnId")] MonAn monAn)
+        public async Task<IActionResult> Create([Bind("TenMon,Gia,MoTa,HinhAnh,LoaiMonAnId,SoLuongTonKho")] MonAn monAn)
         {
             if (!ModelState.IsValid)
             {
@@ -60,7 +60,6 @@ namespace FastFoodOnline.Controllers
                     Console.WriteLine(error.ErrorMessage); // Ghi log lỗi ra console
                 }
 
-                // Nếu có lỗi, cần load lại danh sách Loại Món Ăn để hiển thị đúng dropdown
                 ViewBag.LoaiMonAnId = new SelectList(_context.LoaiMonAns, "LoaiMonAnId", "TenLoai");
                 return View(monAn);
             }
@@ -75,9 +74,11 @@ namespace FastFoodOnline.Controllers
             {
                 Console.WriteLine("Lỗi khi lưu món ăn: " + ex.Message);
                 ModelState.AddModelError("", "Có lỗi xảy ra khi lưu món ăn. Vui lòng thử lại!");
+                ViewBag.LoaiMonAnId = new SelectList(_context.LoaiMonAns, "LoaiMonAnId", "TenLoai");
                 return View(monAn);
             }
         }
+
         // GET: Sửa món ăn
         public async Task<IActionResult> Edit(int? id)
         {
@@ -96,7 +97,7 @@ namespace FastFoodOnline.Controllers
         // POST: Sửa món ăn
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MonAnId,TenMon,Gia,MoTa,HinhAnh,LoaiMonAnId")] MonAn monAn)
+        public async Task<IActionResult> Edit(int id, [Bind("MonAnId,TenMon,Gia,MoTa,HinhAnh,LoaiMonAnId,SoLuongTonKho")] MonAn monAn)
         {
             if (id != monAn.MonAnId) return NotFound();
 
@@ -123,7 +124,16 @@ namespace FastFoodOnline.Controllers
                     throw;
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi sửa món ăn: " + ex.Message);
+                ModelState.AddModelError("", "Có lỗi xảy ra khi sửa món ăn. Vui lòng thử lại!");
+                ViewBag.LoaiMonAnId = new SelectList(_context.LoaiMonAns, "LoaiMonAnId", "TenLoai", monAn.LoaiMonAnId);
+                return View(monAn);
+            }
         }
+
+        // Rollback sửa món ăn
         public async Task<IActionResult> RollbackEdit(int id)
         {
             var monAnJson = HttpContext.Session.GetString("BackupMonAn");
@@ -134,19 +144,25 @@ namespace FastFoodOnline.Controllers
             }
 
             var monAnBackup = JsonConvert.DeserializeObject<MonAn>(monAnJson);
-            if (monAnBackup == null)
+            if (monAnBackup == null || monAnBackup.MonAnId != id)
             {
                 TempData["Error"] = "Lỗi khi khôi phục dữ liệu!";
                 return RedirectToAction(nameof(Edit), new { id });
             }
 
-            // Cập nhật lại dữ liệu cũ
-            _context.Entry(monAnBackup).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-
-            TempData["Message"] = "Dữ liệu đã được khôi phục!";
-            return RedirectToAction(nameof(Index), new { id });
+            try
+            {
+                _context.Entry(monAnBackup).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                TempData["Message"] = "Dữ liệu đã được khôi phục!";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi khôi phục món ăn: " + ex.Message);
+                TempData["Error"] = "Có lỗi xảy ra khi khôi phục dữ liệu!";
+                return RedirectToAction(nameof(Edit), new { id });
+            }
         }
-
     }
 }

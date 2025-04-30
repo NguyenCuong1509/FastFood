@@ -33,23 +33,22 @@ namespace FastFoodOnline.Controllers
             if (!user.EmailConfirmed)
             {
                 TempData["ErrorMessage"] = "Vui lòng xác nhận email trước khi sử dụng giỏ hàng.";
-                return RedirectToAction("EmailNotConfirmed", "Account"); // Chuyển hướng đến trang thông báo
+                return RedirectToAction("EmailNotConfirmed", "Account");
             }
 
-            return null; // Trả về null nếu email đã được xác nhận
+            return null;
         }
 
         // Hiển thị giỏ hàng
         public async Task<IActionResult> Index()
         {
-            // Kiểm tra EmailConfirmed
             var emailCheckResult = await CheckEmailConfirmed();
             if (emailCheckResult != null) return emailCheckResult;
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var gioHang = await _context.GioHangs
                 .Include(g => g.MonAnGioHangs).ThenInclude(mg => mg.MonAn)
-                .Include(g => g.ComboGioHangs).ThenInclude(cg => cg.Combo)
+                .Include(g => g.ComboGioHangs).ThenInclude(cg => cg.Combo).ThenInclude(c => c.MonAnCombos).ThenInclude(mc => mc.MonAn)
                 .FirstOrDefaultAsync(g => g.UserId == userId);
 
             if (gioHang == null)
@@ -70,7 +69,6 @@ namespace FastFoodOnline.Controllers
         // Thêm món ăn vào giỏ hàng
         public async Task<IActionResult> ThemVaoGio(int monAnId)
         {
-            // Kiểm tra EmailConfirmed
             var emailCheckResult = await CheckEmailConfirmed();
             if (emailCheckResult != null) return emailCheckResult;
 
@@ -95,10 +93,20 @@ namespace FastFoodOnline.Controllers
             var monAnGioHang = gioHang.MonAnGioHangs.FirstOrDefault(m => m.MonAnId == monAnId);
             if (monAnGioHang != null)
             {
+                if (monAnGioHang.SoLuong + 1 > monAn.SoLuongTonKho)
+                {
+                    TempData["ErrorMessage"] = $"Không thể thêm món {monAn.TenMon}. Số lượng trong kho không đủ!";
+                    return RedirectToAction("Index");
+                }
                 monAnGioHang.SoLuong++;
             }
             else
             {
+                if (monAn.SoLuongTonKho < 1)
+                {
+                    TempData["ErrorMessage"] = $"Không thể thêm món {monAn.TenMon}. Hết hàng!";
+                    return RedirectToAction("Index");
+                }
                 gioHang.MonAnGioHangs.Add(new MonAnGioHang { MonAnId = monAnId, SoLuong = 1 });
             }
 
@@ -109,12 +117,13 @@ namespace FastFoodOnline.Controllers
         // Thêm combo vào giỏ hàng
         public async Task<IActionResult> ThemComboVaoGio(int comboId)
         {
-            // Kiểm tra EmailConfirmed
             var emailCheckResult = await CheckEmailConfirmed();
             if (emailCheckResult != null) return emailCheckResult;
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var combo = await _context.Combos.FindAsync(comboId);
+            var combo = await _context.Combos
+                .Include(c => c.MonAnCombos).ThenInclude(mc => mc.MonAn)
+                .FirstOrDefaultAsync(c => c.ComboId == comboId);
             if (combo == null)
             {
                 TempData["ErrorMessage"] = "Combo không tồn tại!";
@@ -132,6 +141,20 @@ namespace FastFoodOnline.Controllers
             }
 
             var comboGioHang = gioHang.ComboGioHangs.FirstOrDefault(c => c.ComboId == comboId);
+            int newSoLuong = (comboGioHang?.SoLuong ?? 0) + 1;
+
+            // Kiểm tra tồn kho cho các món ăn trong combo
+            foreach (var monAnCombo in combo.MonAnCombos)
+            {
+                var monAn = monAnCombo.MonAn;
+                int soLuongCan = newSoLuong * monAnCombo.SoLuong;
+                if (monAn.SoLuongTonKho < soLuongCan)
+                {
+                    TempData["ErrorMessage"] = $"Không thể thêm combo {combo.TenCombo}. Món {monAn.TenMon} không đủ số lượng!";
+                    return RedirectToAction("Index");
+                }
+            }
+
             if (comboGioHang != null)
             {
                 comboGioHang.SoLuong++;
@@ -149,14 +172,13 @@ namespace FastFoodOnline.Controllers
         [HttpPost]
         public async Task<IActionResult> CapNhatGio(int? monAnId, int? comboId, int soLuong)
         {
-            // Kiểm tra EmailConfirmed
             var emailCheckResult = await CheckEmailConfirmed();
             if (emailCheckResult != null) return emailCheckResult;
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var gioHang = await _context.GioHangs
-                .Include(g => g.MonAnGioHangs)
-                .Include(g => g.ComboGioHangs)
+                .Include(g => g.MonAnGioHangs).ThenInclude(mg => mg.MonAn)
+                .Include(g => g.ComboGioHangs).ThenInclude(cg => cg.Combo).ThenInclude(c => c.MonAnCombos).ThenInclude(mc => mc.MonAn)
                 .FirstOrDefaultAsync(g => g.UserId == userId);
 
             if (gioHang == null)
@@ -164,12 +186,24 @@ namespace FastFoodOnline.Controllers
                 return NotFound("Không tìm thấy giỏ hàng.");
             }
 
+            if (soLuong < 1)
+            {
+                TempData["ErrorMessage"] = "Số lượng phải lớn hơn 0.";
+                return RedirectToAction("Index");
+            }
+
             if (monAnId.HasValue)
             {
                 var monAnGioHang = gioHang.MonAnGioHangs.FirstOrDefault(m => m.MonAnId == monAnId);
                 if (monAnGioHang != null)
                 {
-                    monAnGioHang.SoLuong = soLuong > 0 ? soLuong : 1;
+                    var monAn = monAnGioHang.MonAn;
+                    if (soLuong > monAn.SoLuongTonKho)
+                    {
+                        TempData["ErrorMessage"] = $"Số lượng món {monAn.TenMon} vượt quá tồn kho ({monAn.SoLuongTonKho}).";
+                        return RedirectToAction("Index");
+                    }
+                    monAnGioHang.SoLuong = soLuong;
                 }
             }
             else if (comboId.HasValue)
@@ -177,18 +211,29 @@ namespace FastFoodOnline.Controllers
                 var comboGioHang = gioHang.ComboGioHangs.FirstOrDefault(c => c.ComboId == comboId);
                 if (comboGioHang != null)
                 {
-                    comboGioHang.SoLuong = soLuong > 0 ? soLuong : 1;
+                    var combo = comboGioHang.Combo;
+                    foreach (var monAnCombo in combo.MonAnCombos)
+                    {
+                        var monAn = monAnCombo.MonAn;
+                        int soLuongCan = soLuong * monAnCombo.SoLuong;
+                        if (soLuongCan > monAn.SoLuongTonKho)
+                        {
+                            TempData["ErrorMessage"] = $"Số lượng combo {combo.TenCombo} vượt quá tồn kho của món {monAn.TenMon} ({monAn.SoLuongTonKho}).";
+                            return RedirectToAction("Index");
+                        }
+                    }
+                    comboGioHang.SoLuong = soLuong;
                 }
             }
 
             await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = "Cập nhật giỏ hàng thành công!";
             return RedirectToAction("Index");
         }
 
         // Xóa món ăn khỏi giỏ hàng
         public async Task<IActionResult> XoaKhoiGio(int monAnId)
         {
-            // Kiểm tra EmailConfirmed
             var emailCheckResult = await CheckEmailConfirmed();
             if (emailCheckResult != null) return emailCheckResult;
 
@@ -213,7 +258,6 @@ namespace FastFoodOnline.Controllers
         // Xóa combo khỏi giỏ hàng
         public async Task<IActionResult> XoaComboKhoiGio(int comboId)
         {
-            // Kiểm tra EmailConfirmed
             var emailCheckResult = await CheckEmailConfirmed();
             if (emailCheckResult != null) return emailCheckResult;
 
@@ -238,7 +282,6 @@ namespace FastFoodOnline.Controllers
         // Xóa toàn bộ giỏ hàng
         public async Task<IActionResult> XoaTatCa()
         {
-            // Kiểm tra EmailConfirmed
             var emailCheckResult = await CheckEmailConfirmed();
             if (emailCheckResult != null) return emailCheckResult;
 
@@ -261,14 +304,13 @@ namespace FastFoodOnline.Controllers
         // Thanh toán giỏ hàng
         public async Task<IActionResult> ThanhToan()
         {
-            // Kiểm tra EmailConfirmed
             var emailCheckResult = await CheckEmailConfirmed();
             if (emailCheckResult != null) return emailCheckResult;
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var gioHang = await _context.GioHangs
                 .Include(g => g.MonAnGioHangs).ThenInclude(mg => mg.MonAn)
-                .Include(g => g.ComboGioHangs).ThenInclude(cg => cg.Combo)
+                .Include(g => g.ComboGioHangs).ThenInclude(cg => cg.Combo).ThenInclude(c => c.MonAnCombos).ThenInclude(mc => mc.MonAn)
                 .FirstOrDefaultAsync(g => g.UserId == userId);
 
             if (gioHang == null || (gioHang.MonAnGioHangs.Count == 0 && gioHang.ComboGioHangs.Count == 0))
@@ -277,48 +319,109 @@ namespace FastFoodOnline.Controllers
                 return RedirectToAction("Index");
             }
 
-            decimal tongTien = gioHang.MonAnGioHangs.Sum(mg => mg.MonAn.Gia * mg.SoLuong)
-                             + gioHang.ComboGioHangs.Sum(cg => cg.Combo.GiaKhuyenMai * cg.SoLuong);
-
-            var hoaDon = new HoaDon
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
             {
-                UserId = userId,
-                NgayTao = DateTime.Now,
-                TongTien = tongTien,
-                TrangThai = TrangThaiHoaDon.ChoXacNhan,
-                HoaDonChiTiets = gioHang.MonAnGioHangs.Select(mg => new HoaDonChiTiet
+                // Kiểm tra tồn kho cho món ăn
+                foreach (var monAnGioHang in gioHang.MonAnGioHangs)
                 {
-                    MonAnId = mg.MonAnId,
-                    SoLuong = mg.SoLuong,
-                    Gia = mg.MonAn.Gia
-                }).ToList()
-            };
+                    var monAn = monAnGioHang.MonAn;
+                    if (monAn.SoLuongTonKho < monAnGioHang.SoLuong)
+                    {
+                        TempData["ErrorMessage"] = $"Món ăn {monAn.TenMon} không đủ số lượng trong kho!";
+                        await transaction.RollbackAsync();
+                        return RedirectToAction("Index");
+                    }
+                }
 
-            foreach (var comboGioHang in gioHang.ComboGioHangs)
-            {
-                hoaDon.HoaDonChiTiets.Add(new HoaDonChiTiet
+                // Kiểm tra tồn kho cho món ăn trong combo
+                foreach (var comboGioHang in gioHang.ComboGioHangs)
                 {
-                    ComboId = comboGioHang.ComboId,
-                    SoLuong = comboGioHang.SoLuong,
-                    Gia = comboGioHang.Combo.GiaKhuyenMai
-                });
+                    var combo = comboGioHang.Combo;
+                    foreach (var monAnCombo in combo.MonAnCombos)
+                    {
+                        var monAn = monAnCombo.MonAn;
+                        int soLuongCan = comboGioHang.SoLuong * monAnCombo.SoLuong;
+                        if (monAn.SoLuongTonKho < soLuongCan)
+                        {
+                            TempData["ErrorMessage"] = $"Món ăn {monAn.TenMon} trong combo {combo.TenCombo} không đủ số lượng!";
+                            await transaction.RollbackAsync();
+                            return RedirectToAction("Index");
+                        }
+                    }
+                }
+
+                // Trừ tồn kho
+                foreach (var monAnGioHang in gioHang.MonAnGioHangs)
+                {
+                    var monAn = monAnGioHang.MonAn;
+                    monAn.SoLuongTonKho -= monAnGioHang.SoLuong;
+                }
+
+                foreach (var comboGioHang in gioHang.ComboGioHangs)
+                {
+                    var combo = comboGioHang.Combo;
+                    foreach (var monAnCombo in combo.MonAnCombos)
+                    {
+                        var monAn = monAnCombo.MonAn;
+                        monAn.SoLuongTonKho -= comboGioHang.SoLuong * monAnCombo.SoLuong;
+                    }
+                }
+
+                // Tính tổng tiền
+                decimal tongTien = gioHang.MonAnGioHangs.Sum(mg => mg.MonAn.Gia * mg.SoLuong)
+                                 + gioHang.ComboGioHangs.Sum(cg => cg.Combo.GiaKhuyenMai * cg.SoLuong);
+
+                // Tạo hóa đơn
+                var hoaDon = new HoaDon
+                {
+                    UserId = userId,
+                    NgayTao = DateTime.Now,
+                    TongTien = tongTien,
+                    TrangThai = TrangThaiHoaDon.ChoXacNhan,
+                    HoaDonChiTiets = gioHang.MonAnGioHangs.Select(mg => new HoaDonChiTiet
+                    {
+                        MonAnId = mg.MonAnId,
+                        SoLuong = mg.SoLuong,
+                        Gia = mg.MonAn.Gia
+                    }).ToList()
+                };
+
+                foreach (var comboGioHang in gioHang.ComboGioHangs)
+                {
+                    hoaDon.HoaDonChiTiets.Add(new HoaDonChiTiet
+                    {
+                        ComboId = comboGioHang.ComboId,
+                        SoLuong = comboGioHang.SoLuong,
+                        Gia = comboGioHang.Combo.GiaKhuyenMai
+                    });
+                }
+
+                // Lưu hóa đơn
+                _context.HoaDons.Add(hoaDon);
+
+                // Xóa giỏ hàng
+                _context.MonAnGioHangs.RemoveRange(gioHang.MonAnGioHangs);
+                _context.ComboGioHangs.RemoveRange(gioHang.ComboGioHangs);
+
+                // Lưu tất cả thay đổi
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                TempData["SuccessMessage"] = "Thanh toán thành công! Đơn hàng của bạn đang chờ xác nhận.";
+                return RedirectToAction("Index");
             }
-
-            _context.HoaDons.Add(hoaDon);
-            await _context.SaveChangesAsync();
-
-            _context.MonAnGioHangs.RemoveRange(gioHang.MonAnGioHangs);
-            _context.ComboGioHangs.RemoveRange(gioHang.ComboGioHangs);
-            await _context.SaveChangesAsync();
-
-            TempData["SuccessMessage"] = "Thanh toán thành công! Đơn hàng của bạn đang chờ xác nhận.";
-            return RedirectToAction("Index");
+            catch (Exception)
+            {
+                await transaction.RollbackAsync();
+                TempData["ErrorMessage"] = "Có lỗi xảy ra khi thanh toán. Vui lòng thử lại!";
+                return RedirectToAction("Index");
+            }
         }
 
         // Hiển thị đơn hàng của tôi
         public async Task<IActionResult> DonHangCuaToi()
         {
-            // Kiểm tra EmailConfirmed
             var emailCheckResult = await CheckEmailConfirmed();
             if (emailCheckResult != null) return emailCheckResult;
 

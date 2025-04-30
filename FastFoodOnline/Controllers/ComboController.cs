@@ -1,11 +1,11 @@
-﻿using System;
+﻿using FastFoodOnline.Data;
+using FastFoodOnline.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using FastFoodOnline.Data;
-using FastFoodOnline.Models;
 
 namespace FastFoodOnline.Controllers
 {
@@ -35,6 +35,7 @@ namespace FastFoodOnline.Controllers
             return View();
         }
 
+        // POST: Tạo combo
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Combo combo, List<int> monAnIds, List<int> soLuongs)
@@ -46,14 +47,42 @@ namespace FastFoodOnline.Controllers
                 return View(combo);
             }
 
+            // Kiểm tra giá khuyến mãi
+            if (combo.GiaKhuyenMai >= combo.GiaGoc)
+            {
+                ModelState.AddModelError("GiaKhuyenMai", "Giá khuyến mãi phải nhỏ hơn giá gốc.");
+                ViewBag.MonAnList = _context.MonAns.ToList();
+                return View(combo);
+            }
+
             try
             {
+                // Kiểm tra tồn kho
+                var monAns = await _context.MonAns.Where(m => monAnIds.Contains(m.MonAnId)).ToListAsync();
+                for (int i = 0; i < monAnIds.Count; i++)
+                {
+                    if (soLuongs[i] <= 0)
+                    {
+                        ModelState.AddModelError("", $"Số lượng món ăn ID {monAnIds[i]} phải lớn hơn 0.");
+                        ViewBag.MonAnList = _context.MonAns.ToList();
+                        return View(combo);
+                    }
+                    var monAn = monAns.FirstOrDefault(m => m.MonAnId == monAnIds[i]);
+                    if (monAn == null || monAn.SoLuongTonKho < soLuongs[i])
+                    {
+                        ModelState.AddModelError("", $"Món ăn {monAn?.TenMon ?? "ID " + monAnIds[i]} không đủ số lượng trong kho (còn {monAn?.SoLuongTonKho ?? 0}).");
+                        ViewBag.MonAnList = _context.MonAns.ToList();
+                        return View(combo);
+                    }
+                }
+
+                // Tạo combo
                 _context.Combos.Add(combo);
                 await _context.SaveChangesAsync();
 
+                // Thêm món ăn vào combo
                 for (int i = 0; i < monAnIds.Count; i++)
                 {
-                    if (soLuongs[i] <= 0) continue; // Bỏ qua nếu số lượng không hợp lệ
                     _context.MonAnCombos.Add(new MonAnCombo
                     {
                         ComboId = combo.ComboId,
@@ -67,7 +96,7 @@ namespace FastFoodOnline.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", "Có lỗi xảy ra khi tạo combo: " + ex.Message);
+                ModelState.AddModelError("", $"Có lỗi xảy ra khi tạo combo: {ex.Message}");
                 ViewBag.MonAnList = _context.MonAns.ToList();
                 return View(combo);
             }
@@ -89,6 +118,7 @@ namespace FastFoodOnline.Controllers
             return View(combo);
         }
 
+        // POST: Chỉnh sửa combo
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Combo combo, List<int> monAnIds, List<int> soLuongs)
@@ -106,8 +136,36 @@ namespace FastFoodOnline.Controllers
                 return View(combo);
             }
 
+            // Kiểm tra giá khuyến mãi
+            if (combo.GiaKhuyenMai >= combo.GiaGoc)
+            {
+                ModelState.AddModelError("GiaKhuyenMai", "Giá khuyến mãi phải nhỏ hơn giá gốc.");
+                ViewBag.MonAnList = _context.MonAns.ToList();
+                return View(combo);
+            }
+
             try
             {
+                // Kiểm tra tồn kho
+                var monAns = await _context.MonAns.Where(m => monAnIds.Contains(m.MonAnId)).ToListAsync();
+                for (int i = 0; i < monAnIds.Count; i++)
+                {
+                    if (soLuongs[i] <= 0)
+                    {
+                        ModelState.AddModelError("", $"Số lượng món ăn ID {monAnIds[i]} phải lớn hơn 0.");
+                        ViewBag.MonAnList = _context.MonAns.ToList();
+                        return View(combo);
+                    }
+                    var monAn = monAns.FirstOrDefault(m => m.MonAnId == monAnIds[i]);
+                    if (monAn == null || monAn.SoLuongTonKho < soLuongs[i])
+                    {
+                        ModelState.AddModelError("", $"Món ăn {monAn?.TenMon ?? "ID " + monAnIds[i]} không đủ số lượng trong kho (còn {monAn?.SoLuongTonKho ?? 0}).");
+                        ViewBag.MonAnList = _context.MonAns.ToList();
+                        return View(combo);
+                    }
+                }
+
+                // Cập nhật combo
                 var existingCombo = await _context.Combos
                     .Include(c => c.MonAnCombos)
                     .FirstOrDefaultAsync(c => c.ComboId == id);
@@ -117,11 +175,10 @@ namespace FastFoodOnline.Controllers
                     return NotFound();
                 }
 
-                // Cập nhật thông tin combo
                 existingCombo.TenCombo = combo.TenCombo;
                 existingCombo.GiaGoc = combo.GiaGoc;
                 existingCombo.GiaKhuyenMai = combo.GiaKhuyenMai;
-                existingCombo.HinhAnh = combo.HinhAnh; // Cập nhật URL hình ảnh
+                existingCombo.HinhAnh = combo.HinhAnh;
 
                 // Xóa món ăn cũ
                 _context.MonAnCombos.RemoveRange(existingCombo.MonAnCombos);
@@ -129,7 +186,6 @@ namespace FastFoodOnline.Controllers
                 // Thêm món ăn mới
                 for (int i = 0; i < monAnIds.Count; i++)
                 {
-                    if (soLuongs[i] <= 0) continue;
                     _context.MonAnCombos.Add(new MonAnCombo
                     {
                         ComboId = combo.ComboId,
@@ -143,7 +199,7 @@ namespace FastFoodOnline.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", "Có lỗi xảy ra khi cập nhật combo: " + ex.Message);
+                ModelState.AddModelError("", $"Có lỗi xảy ra khi cập nhật combo: {ex.Message}");
                 ViewBag.MonAnList = _context.MonAns.ToList();
                 return View(combo);
             }

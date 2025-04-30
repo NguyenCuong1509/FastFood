@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FastFoodOnline")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3538125c3822efd48b164bb025af1bd82321ec8b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+959947b654af989fc9d2cc9d8f96614203acb902")]
 [assembly: System.Reflection.AssemblyProductAttribute("FastFoodOnline")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FastFoodOnline")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
